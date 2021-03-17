@@ -7,27 +7,24 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "users")
-public class User {
-    @Id
+public class UserDto {
+    @NotBlank //@NotEmpty
     private String idUserEmail;
     private String firstname;
     private String lastname;
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
     private Customize customize;
     private boolean isPremium;
     private ArrayList<String> favoriteList;
-    //private ArrayList<String> clickedLike;
-    //private ArrayList<String> clickedMoreInfos;
-    //private ArrayList<String> clickedContact;
-    //private ArrayList<String> clicked; // tel, e-mail, video, office
-    //private boolean hasStress;
-
 }
