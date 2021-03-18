@@ -1,43 +1,24 @@
 import './App.css';
-import LoginSignup from "./pages/LoginSignup";
 import styled from 'styled-components/macro'
+import SingInSingUp from "./pages/SignInSingUp";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import React, {useState} from 'react'
+import SingUp from "./pages/SingUp";
 
 function App() {
   return (
-    <PageLoyout className="App">
-      <Header>
-        <p>halli</p>
-          <p>hallo</p>
-      </Header>
-        <section>
-            <LoginSignup/>
-        </section>
-        <Footer>
-            <p>footer</p>
-        </Footer>
-    </PageLoyout>
+      <Router>
+        <Switch>
+            <Route exact path="/login">
+                <SingUp/>
+            </Route>
+            <Route exact path="/">
+                <h1>Home</h1>
+            </Route>
+        </Switch>
+    </Router>
   );
 }
 
 export default App;
 
-const PageLoyout = styled.div`
-  height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  background: #333;
-  color: white;
-  margin: 55px;
-`
-
-const Header = styled.header`
-  padding: 0 16px;
-  background: #222;
-  color: wheat;
-`
-
-const Footer = styled.footer`
-  padding: 0 16px;
-  background: hotpink;
-  color: #61dafb;
-`

@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useForm } from "react-hook-form";
 
 function Copyright() {
     return (
@@ -48,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
+    const { register, handleSubmit, watch, errors } = useForm();
+
+    const onSubmit = (data) =>{
+        console.log(data)
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -59,7 +65,9 @@ export default function SignUp() {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate
+                      onSubmit={handleSubmit(onSubmit)}>
+
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -93,6 +101,16 @@ export default function SignUp() {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                ref={
+                                    register({
+                                        required:
+                                            {value:true, message: 'please insert Email'},
+                                        maxLength:
+                                            {value:20, message: 'please, mo more than 20 letters'},
+                                        minLength:
+                                            {value:2, message: 'please, mo more than 20 letters'},
+                                    })
+                                }
                             />
                         </Grid>
                         <Grid item xs={12}>
