@@ -1,9 +1,8 @@
 import '../App.css';
-import LoginSignup from "../backup/LoginSignup";
 import styled from 'styled-components/macro'
-import SignUpPage from "../components/SignUpPage";
+import SingUp from "../components/SingUp";
 
-function SingInSingUp() {
+function SingUpPage() {
   return (
     <PageLayout>
       <Header>
@@ -11,7 +10,7 @@ function SingInSingUp() {
           <p>hallo</p>
       </Header>
         <section>
-            <SignUpPage/>
+            <SingUp/>
         </section>
         <Footer>
             <p>footer</p>
@@ -20,7 +19,7 @@ function SingInSingUp() {
   );
 }
 
-export default SingInSingUp;
+export default SingUpPage;
 
 const PageLayout = styled.div`
   height: 100vh;
