@@ -1,65 +1,127 @@
 import { Component, useState } from 'react'
 import styled from 'styled-components/macro'
 import { loginUser } from '../services/loginService'
+import {useForm} from "react-hook-form";
+
 
 export default function SingUp() {
     //const [userName, setUserName] = useState('')
     //const [userPassword, setUserPassword] = useState('')
     //const [idUserEmail, setUserEmail] = useState('')
+
+    const { register, errors, handleSubmit } = useForm();
     const initialFormState = { userName:'', userPassword: '', idUserEmail: '' }
-    const [singUpData, setSingUpData] = useState({
-        userName:'',
-        userPassword: '',
-        idUserEmail: ''
-    })
+    const [singUpData, setSingUpData] = useState([])
 
 
-    const handleSubmit = (event) => {
+    const onSubmit = (data, e) =>{
+        console.log(data);
+        console.log(data.userName)
+        setSingUpData([
+            ...singUpData, data
+        ])
+        e.preventDefault()
+
+        if (!data.userName && !data.userPassword && !data.idUserEmail) {
+            return
+        }
+        loginUser(data.userName, data.userPassword, data.idUserEmail).then()
+
+        // limpiar campos
+        e.target.reset();    }
+
+    // Ab hier
+
+
+    /*const handleSubmit = (event) => {
         event.preventDefault()
         if (!singUpData.userName && !singUpData.userPassword && !singUpData.idUserEmail) {
             return
         }
         loginUser(singUpData.userName, singUpData.userPassword, singUpData.idUserEmail).then()
         setSingUpData(initialFormState)
-    }
+    }*/
 
-    const handleInputChange = (event) => {
+    /*const handleInputChange = (event) => {
         console.log(event.target.value)
         setSingUpData({
             ...singUpData,
             [event.target.name]: event.target.value
         })
-    }
+    }*/
 
     return (
         <>
             <p>Please Login</p>
 
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <input
                     placeholder="Username"
                     type="text"
                     name="userName"
-                    onChange={handleInputChange}
                     value={singUpData.userName}
-                    //onChange={({ target }) => setUserName(target.value)}
+                    ref={register({
+                        required: {
+                            value: true,
+                            message: 'Username bitte eingeben'
+                        },
+                        maxLength: {
+                            value: 20,
+                            message: 'Username too long. Max 20 letters'
+                        },
+                        minLength: {
+                            value: 2,
+                            message: 'Username not valid. Min 2 letters'
+                        }
+                    })}
                 />
+                <span>
+                    {errors?.userName?.message}
+                </span>
+
                 <input
                     placeholder="Password"
                     type="password"
                     name="userPassword"
-                    onChange={handleInputChange}
                     value={singUpData.userPassword}
-                    //onChange={({ target }) => setUserPassword(target.value)}
+                    ref={register({
+                        required: {
+                            value: true,
+                            message: 'Password bitte eingeben'
+                        },
+                        maxLength: {
+                            value: 20,
+                            message: 'Password too long. Max 20 letters'
+                        },
+                        minLength: {
+                            value: 2,
+                            message: 'Password not valid. Min 2 letters'
+                        }
+                    })}
                 />
+                <span>
+                    {errors?.userPassword?.message}
+                </span>
+
                 <input
                     placeholder="Email"
                     type="text"
                     name="idUserEmail"
-                    onChange={handleInputChange}
                     value={singUpData.idUserEmail}
-                    //onChange={({ target }) => setUserEmail(target.value)}
+                    ref={register({
+                        required: {
+                            value: true,
+                            message: 'Email bitte eingeben'
+                        },
+                        pattern: {
+                            value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                            message: 'Email not valid'
+                        }
+                    })}
                 />
+                <span>
+                    {errors?.idUserEmail?.message}
+                </span>
 
                 <button type="submit">login</button>
             </Form>
@@ -78,7 +140,7 @@ const Form = styled.form`
   button {
     padding: 8px;
     margin: 8px;
-    background-color: chocolate;
+    background-color:blueviolet ;
     font-family: 'Al Nile';
   }
 `
