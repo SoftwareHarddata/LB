@@ -1,12 +1,12 @@
 package com.softwareharddata.bbetter.service;
 
 import com.softwareharddata.bbetter.db.UserMongoDb;
+import com.softwareharddata.bbetter.db.UserMysqlDb;
 import com.softwareharddata.bbetter.exception.EntityAlreadyExistsException;
-import com.softwareharddata.bbetter.model.User;
+import com.softwareharddata.bbetter.model.UserSingUp;
 import com.softwareharddata.bbetter.model.UserDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -15,9 +15,12 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-class UserServiceTest {
+class UserSingUpServiceTest {
 
-    private final UserMongoDb userDb = mock(UserMongoDb.class);
+    //private final UserMongoDb userDb = mock(UserMongoDb.class);
+    //private final UserService userService = new UserService(userDb);
+
+    private final UserMysqlDb userDb = mock(UserMysqlDb.class);
     private final UserService userService = new UserService(userDb);
 
     @Test
@@ -29,30 +32,30 @@ class UserServiceTest {
         when(userDb.existsById(email)).thenReturn(false);
 
         UserDto userDto = UserDto.builder()
-                .idUserEmail(email)
+                .email(email)
                 .username("superUser")
                 .password("superUser-password")
                 .build();
 
-        User mockUser = User.builder()
-                .idUserEmail(email)
+        UserSingUp mockUserSingUp = UserSingUp.builder()
+                .email(email)
                 .username("superUser")
                 .password("superUser-password")
                 .build();
 
-        when(userDb.save(mockUser)).thenReturn(mockUser);
+        when(userDb.save(mockUserSingUp)).thenReturn(mockUserSingUp);
 
         //WHEN
-        User actual = userService.saveUser(userDto);
+        UserSingUp actual = userService.saveUser(userDto);
 
         //THEN
-        User expectedUser = User.builder()
-                .idUserEmail(email)
+        UserSingUp expectedUserSingUp = UserSingUp.builder()
+                .email(email)
                 .username("superUser")
                 .password("superUser-password")
                 .build();
-        assertThat(actual, is(expectedUser));
-        verify(userDb).save(expectedUser);
+        assertThat(actual, is(expectedUserSingUp));
+        verify(userDb).save(expectedUserSingUp);
     }
 
     @Test
@@ -62,7 +65,7 @@ class UserServiceTest {
         String email = UUID.randomUUID().toString();
         when(userDb.existsById(email)).thenReturn(true);
         UserDto userDto = UserDto.builder()
-                .idUserEmail(email)
+                .email(email)
                 .username("superUser")
                 .password("superUser-password")
                 .build();

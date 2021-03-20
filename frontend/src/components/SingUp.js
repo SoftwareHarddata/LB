@@ -7,10 +7,10 @@ import {useForm} from "react-hook-form";
 export default function SingUp() {
     //const [userName, setUserName] = useState('')
     //const [userPassword, setUserPassword] = useState('')
-    //const [idUserEmail, setUserEmail] = useState('')
+    //const [email, setUserEmail] = useState('')
 
     const { register, errors, handleSubmit } = useForm();
-    const initialFormState = { userName:'', userPassword: '', idUserEmail: '' }
+    const initialFormState = { userName:'', userPassword: '', email: '' }
     const [singUpData, setSingUpData] = useState([])
 
 
@@ -22,10 +22,10 @@ export default function SingUp() {
         ])
         e.preventDefault()
 
-        if (!data.userName && !data.userPassword && !data.idUserEmail) {
+        if (!data.userName && !data.userPassword && !data.email) {
             return
         }
-        loginUser(data.userName, data.userPassword, data.idUserEmail).then()
+        loginUser(data.userName, data.userPassword, data.email).then()
 
         // limpiar campos
         e.target.reset();    }
@@ -35,10 +35,10 @@ export default function SingUp() {
 
     /*const handleSubmit = (event) => {
         event.preventDefault()
-        if (!singUpData.userName && !singUpData.userPassword && !singUpData.idUserEmail) {
+        if (!singUpData.userName && !singUpData.userPassword && !singUpData.email) {
             return
         }
-        loginUser(singUpData.userName, singUpData.userPassword, singUpData.idUserEmail).then()
+        loginUser(singUpData.userName, singUpData.userPassword, singUpData.email).then()
         setSingUpData(initialFormState)
     }*/
 
@@ -106,8 +106,8 @@ export default function SingUp() {
                 <input
                     placeholder="Email"
                     type="text"
-                    name="idUserEmail"
-                    value={singUpData.idUserEmail}
+                    name="email"
+                    value={singUpData.email}
                     ref={register({
                         required: {
                             value: true,
@@ -120,7 +120,7 @@ export default function SingUp() {
                     })}
                 />
                 <span>
-                    {errors?.idUserEmail?.message}
+                    {errors?.email?.message}
                 </span>
 
                 <button type="submit">login</button>
