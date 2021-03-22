@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
     appBar: {
         [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${drawerWidth}px)`,
-            marginLeft: drawerWidth,
+            //marginLeft: drawerWidth,
+            marginRight:drawerWidth,
         },
     },
 }))
@@ -29,13 +30,6 @@ export default function NavbarComponent (props){
     return (
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                    <IconButton
-                        onClick={()=> props.handleDrawerToggle()}
-                        color='inherit'
-                        aria-label="menu"
-                        className={classes.menuButton}>
-                        <MenuIcon />
-                    </IconButton>
                     <IconButton
                         color='action'
                         aria-label="logo"
@@ -48,7 +42,13 @@ export default function NavbarComponent (props){
                     <Button variant='text' color='inherit'>
                         Login
                     </Button>
-
+                    <IconButton
+                        onClick={()=> props.handleDrawerToggle()}
+                        color='inherit'
+                        aria-label="menu"
+                        className={classes.menuButton}>
+                        <MenuIcon />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
     )

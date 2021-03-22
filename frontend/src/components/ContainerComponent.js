@@ -30,6 +30,19 @@ export default function ContainerComponent (){
     return (
         <div className={classes.root}>
             <NavbarComponent handleDrawerToggle={handleDrawerToggle}/>
+
+            <div className={classes.content}>
+                <div className={classes.toolbar}></div>
+                <Typography paragraph>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                    ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
+                    facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+                    gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
+                    donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                    adipiscing bibendum est ultricies integer quis.
+                </Typography>
+            </div>
+
             <Hidden xsDown>
                 <MyDrawer
                     variant='permanent'
@@ -45,17 +58,7 @@ export default function ContainerComponent (){
                 />
             </Hidden>
 
-            <div className={classes.content}>
-                <div className={classes.toolbar}></div>
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                    facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                    gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                    donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis.
-                </Typography>
-            </div>
+
         </div>
     )
 }
