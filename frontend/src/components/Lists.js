@@ -3,10 +3,10 @@ import {List, ListItem, ListItemIcon,
     ListItemText, Divider} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
 import SearchIcon from '@material-ui/icons/Search';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import GroupIcon from '@material-ui/icons/Group';
@@ -27,7 +27,13 @@ export default function Lists (){
 
     return (
         <>
-            <List component='nav'>
+            <List component='nav'
+                  subheader={
+                      <ListSubheader component="div" id="nested-list-subheader">
+                          Nested List Items
+                      </ListSubheader>
+                  }
+            >
                 <ListItem button>
                     <ListItemIcon>
                         <AccountCircleIcon fontSize='default'/>
