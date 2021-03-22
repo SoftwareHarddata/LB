@@ -28,7 +28,7 @@ export default function MyDrawer (props){
                 classes={{
                     paper: classes.drawerPaper,
                 }}
-                anchor='right'
+                anchor='left'
                 variant={props.variant}
                 open={props.open}
                 onClose={props.onClose ? props.onClose : null}

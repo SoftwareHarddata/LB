@@ -6,7 +6,7 @@ import AppleIcon from '@material-ui/icons/Apple';
 
 const drawerWidth =240;
 const useStyles = makeStyles(theme => ({
-    offset: theme.mixins.toolbar,
+    //offset: theme.mixins.toolbar,
     menuButton: {
         marginRight: theme.spacing(2),
         [theme.breakpoints.up('sm')]: {
@@ -30,6 +30,13 @@ export default function NavbarComponent (props){
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <IconButton
+                        onClick={()=> props.handleDrawerToggle()}
+                        color='inherit'
+                        aria-label="menu"
+                        className={classes.menuButton}>
+                        <MenuIcon />
+                    </IconButton>
+                    <IconButton
                         color='action'
                         aria-label="logo"
                         className={classes.menuButton}>
@@ -41,13 +48,7 @@ export default function NavbarComponent (props){
                     <Button variant='text' color='inherit'>
                         Login
                     </Button>
-                    <IconButton
-                        onClick={()=> props.handleDrawerToggle()}
-                        color='inherit'
-                        aria-label="menu"
-                        className={classes.menuButton}>
-                        <MenuIcon />
-                    </IconButton>
+
                 </Toolbar>
             </AppBar>
     )
