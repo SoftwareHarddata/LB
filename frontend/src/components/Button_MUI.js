@@ -1,4 +1,3 @@
-import { Component, useState } from 'react'
 import Button from "@material-ui/core/Button";
 import {makeStyles, ThemeProvider} from "@material-ui/core/styles";
 import theme from "../themeConfig";
