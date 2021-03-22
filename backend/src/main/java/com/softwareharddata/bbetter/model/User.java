@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,17 +16,29 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@Document(collection = "users")
-public class User{
+//@Document(collection = "user")
+@Entity
+@Table(name="user")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    private String idUserEmail;
-    private String username;
-    private String password;
+    private String id_user;
+    private String id_user_signup;
 
-    private Customize customize;
+    @Column(name="is_premium")
     private boolean isPremium;
-    private ArrayList<String> favoriteList;
+    private int age;
+    private String sector;
+    private String department;
+    private String occupation;
+    private String companySize;
+    private int plz;
+    // private ArrayList<String> interests;
+    // private ArrayList<String> extraInfos;
+
+    //private ArrayList<String> favoriteList;
     //private ArrayList<String> clickedLike;
     //private ArrayList<String> clickedMoreInfos;
     //private ArrayList<String> clickedContact;

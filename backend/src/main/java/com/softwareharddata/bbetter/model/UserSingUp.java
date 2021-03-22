@@ -25,8 +25,7 @@ public class UserSingUp implements Serializable {
 
     @Id
     @Column(name="id_user_singup")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUserSingUp;
+    private String idUserSingUp;
     private String email;
     private String username;
     private String password;

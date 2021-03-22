@@ -8,6 +8,8 @@ import com.softwareharddata.bbetter.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 
 @Service
 public class UserService {
@@ -25,10 +27,13 @@ public class UserService {
 
         CheckExistingUser(userDto);
 
+        String id = UUID.randomUUID().toString();
+
         UserSingUp userSingUp = UserSingUp.builder()
                 .email(userDto.getEmail())
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
+                .idUserSingUp(id)
                 //.customize(userDto.getCustomize())
                 //.isPremium(userDto.isPremium())
                 //.favoriteList(userDto.getFavoriteList())

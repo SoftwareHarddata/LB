@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto_copy {
+public class UserDto_mongo {
     @NotBlank //@NotEmpty
     private String idUserEmail;
     private String firstname;
@@ -21,7 +21,7 @@ public class UserDto_copy {
     private String username;
     @NotBlank
     private String password;
-    private Customize customize;
+    //private Customize customize;
     private boolean isPremium;
     private ArrayList<String> favoriteList;
 }
