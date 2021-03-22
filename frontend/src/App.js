@@ -19,7 +19,6 @@ function App() {
                 <SingUpPage/>
             </Route>
             <Route exact path="/">
-                <Home/>
                 <ContainerComponent theme={theme}/>
             </Route>
             <Route exact path="/details">

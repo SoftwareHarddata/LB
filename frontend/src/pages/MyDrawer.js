@@ -8,7 +8,6 @@ const myStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
-
     },
     drawerPaper: {
         width: drawerWidth,
@@ -17,7 +16,7 @@ const myStyles = makeStyles(theme => ({
 
 }))
 
-export default function MyDrawer (){
+export default function MyDrawer (props){
 
     const classes = myStyles()
 
@@ -26,11 +25,13 @@ export default function MyDrawer (){
         <div>
             <Drawer
                 className={classes.drawer}
-                variant='permanent'
                 classes={{
                     paper: classes.drawerPaper,
                 }}
-                anchor='left'
+                anchor='right'
+                variant={props.variant}
+                open={props.open}
+                onClose={props.onClose ? props.onClose : null}
             >
                 <div className={classes.toolbar}></div>
                 <Divider/>

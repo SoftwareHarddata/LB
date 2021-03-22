@@ -1,7 +1,8 @@
 import React from "react";
-import {makeStyles, Typography} from "@material-ui/core";
+import {Hidden, makeStyles, Typography} from "@material-ui/core";
 import MyDrawer from "../pages/MyDrawer";
 import NavbarComponent from "./NavbarComponent";
+import HiddenComponent from "./HiddenComponent";
 
 const drawerWidth =240;
 
@@ -13,7 +14,7 @@ const myStyles = makeStyles(theme => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.paper,
     },
 
 }))
@@ -21,11 +22,29 @@ const myStyles = makeStyles(theme => ({
 export default function ContainerComponent (){
 
     const classes = myStyles()
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen)
+    }
     return (
         <div className={classes.root}>
-            <NavbarComponent/>
-            <MyDrawer/>
+            <NavbarComponent handleDrawerToggle={handleDrawerToggle}/>
+            <Hidden xsDown>
+                <MyDrawer
+                    variant='permanent'
+                    open ={true}
+                />
+            </Hidden>
+
+            <Hidden smUp>
+                <MyDrawer
+                    variant='temporary'
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                />
+            </Hidden>
+
             <div className={classes.content}>
                 <div className={classes.toolbar}></div>
                 <Typography paragraph>
