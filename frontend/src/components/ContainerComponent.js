@@ -43,14 +43,14 @@ export default function ContainerComponent (){
                 </Typography>
             </div>
 
-            <Hidden xsDown>
+            <Hidden lgDown>
                 <MyDrawer
                     variant='permanent'
                     open ={true}
                 />
             </Hidden>
 
-            <Hidden smUp>
+            <Hidden xlUp>
                 <MyDrawer
                     variant='temporary'
                     open={mobileOpen}

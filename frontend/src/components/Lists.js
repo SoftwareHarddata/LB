@@ -30,7 +30,7 @@ export default function Lists (){
             <List component='nav'
                   subheader={
                       <ListSubheader component="div" id="nested-list-subheader">
-                          Nested List Items
+                          Menu
                       </ListSubheader>
                   }
             >

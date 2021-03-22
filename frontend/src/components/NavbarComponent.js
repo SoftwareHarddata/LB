@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     //offset: theme.mixins.toolbar,
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('xl')]: {
             display: 'none',
         },
     },
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow:1 // take all the free place
     },
     appBar: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('xl')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             //marginLeft: drawerWidth,
             marginRight:drawerWidth,
