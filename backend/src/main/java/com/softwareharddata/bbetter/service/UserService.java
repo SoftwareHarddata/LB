@@ -3,14 +3,16 @@ package com.softwareharddata.bbetter.service;
 import com.softwareharddata.bbetter.db.UserDetailsMysqlDb;
 import com.softwareharddata.bbetter.db.UserMysqlDb;
 import com.softwareharddata.bbetter.exception.EntityAlreadyExistsException;
-import com.softwareharddata.bbetter.model.UserDetails;
-import com.softwareharddata.bbetter.model.UserDetailsDto;
-import com.softwareharddata.bbetter.model.UserSingUp;
-import com.softwareharddata.bbetter.model.UserSingUpDto;
+import com.softwareharddata.bbetter.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+
+import org.springframework.web.server.ResponseStatusException;
+import com.softwareharddata.bbetter.exception.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
 
 
 @Service
@@ -42,6 +44,7 @@ public class UserService {
         return userDb.save(userSingUp);
     }
 
+    //2
     private void CheckExistingUser (UserSingUpDto userSingUpDto){
         userDb.findByEmail(userSingUpDto.getEmail()).ifPresent(
                 userSingUp1 -> {
@@ -55,7 +58,19 @@ public class UserService {
 
     }
 
+    // todo: tests
+    public List<UserSingUp> getAllUsers() {
+        return (List<UserSingUp>) userDb.findAll();
+    }
 
+    // todo: tests
+    public UserSingUp getUserById(String id) {
+        return userDb.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("User not found with id: %s", id)));
+        //.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "userSingUp not found"));
+    }
+
+    // todo: tests
     public UserDetails saveUserDetails(UserDetailsDto userDetailsDto) {
         String id = UUID.randomUUID().toString();
 

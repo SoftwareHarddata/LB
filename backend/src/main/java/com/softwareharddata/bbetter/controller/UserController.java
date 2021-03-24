@@ -1,5 +1,6 @@
 package com.softwareharddata.bbetter.controller;
 
+import com.softwareharddata.bbetter.model.UserAllInfos;
 import com.softwareharddata.bbetter.model.UserSingUp;
 import com.softwareharddata.bbetter.model.UserSingUpDto;
 import com.softwareharddata.bbetter.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -24,6 +26,20 @@ public class UserController {
     public ResponseEntity<UserSingUp> saveUser(@Valid @RequestBody UserSingUpDto userSingUpDto) {
          UserSingUp createdUserSingUp = this.userService.saveUser(userSingUpDto);
         return new ResponseEntity<>(createdUserSingUp, HttpStatus.CREATED);
+    }
+
+    // todo: tests
+    @GetMapping
+    public ResponseEntity<List<UserSingUp>> getAllUsers(){
+        List<UserSingUp> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    // todo: tests
+    @GetMapping("/{id}")
+    public ResponseEntity<UserSingUp> getUserById(@PathVariable String id){
+        UserSingUp userAllInfos = userService.getUserById(id);
+        return new ResponseEntity<>(userAllInfos, HttpStatus.OK);
     }
 
 
