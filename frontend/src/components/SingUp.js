@@ -27,7 +27,7 @@ export default function SingUp() {
         }
         loginUser(data.userName, data.userPassword, data.email).then()
 
-        // limpiar campos
+        // clean fields
         e.target.reset();    }
 
     // Ab hier

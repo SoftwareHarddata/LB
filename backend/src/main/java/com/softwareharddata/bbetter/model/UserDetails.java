@@ -18,22 +18,24 @@ import java.util.ArrayList;
 @Builder
 //@Document(collection = "user")
 @Entity
-@Table(name="user")
-public class User implements Serializable {
+@Table(name="user_details")
+public class UserDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String id_user;
-    private String id_user_signup;
+    @Column(name="id_user")
+    private String idUser;
+    @Column(name="id_user_singup")
+    private String idUserSingUp;
 
     @Column(name="is_premium")
     private boolean isPremium;
-    private int age;
+    private String age;
     private String sector;
     private String department;
     private String occupation;
-    private String companySize;
+    private String company_size;
     private int plz;
     // private ArrayList<String> interests;
     // private ArrayList<String> extraInfos;

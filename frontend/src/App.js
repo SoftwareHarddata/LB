@@ -15,13 +15,13 @@ function App() {
       <Router>
 
         <Switch>
-            <Route exact path="/login">
+            <Route exact path="/user/login">
                 <SingUpPage/>
             </Route>
             <Route exact path="/">
                 <ContainerComponent/>
             </Route>
-            <Route exact path="/details">
+            <Route exact path="/user/details">
                 <Userdetails/>
             </Route>
         </Switch>

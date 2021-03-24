@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import {loginUser} from "../services/loginService";
+import {userDetails} from "../services/userDetailsService";
 
 const ages = [
     {
@@ -141,6 +143,9 @@ export default function Userdetails() {
             }
         ])*/
 
+        userDetails(userData.age, userData.sector, userData.department,
+            userData.occupation, userData.company_size, userData.plz).then()
+
         e.target.reset()
         setAge('')
         setSector('')
@@ -155,7 +160,7 @@ export default function Userdetails() {
 
     }
 
-//  todo: plz validieren, button ändern, reset anpassen, hooks löschen
+//  todo: plz validieren (with react hooks form?), button ändern to Material UI, reset anpassen, unnötigen hooks löschen
 
     return (
         <>

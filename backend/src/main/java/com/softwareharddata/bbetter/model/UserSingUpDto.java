@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto {
+public class UserSingUpDto {
     @NotBlank //@NotEmpty
     private String email;
     @NotBlank

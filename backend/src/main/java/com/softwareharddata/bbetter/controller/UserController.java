@@ -1,7 +1,7 @@
 package com.softwareharddata.bbetter.controller;
 
 import com.softwareharddata.bbetter.model.UserSingUp;
-import com.softwareharddata.bbetter.model.UserDto;
+import com.softwareharddata.bbetter.model.UserSingUpDto;
 import com.softwareharddata.bbetter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserSingUp> saveUser(@Valid @RequestBody UserDto userDto) {
-         UserSingUp createdUserSingUp = this.userService.saveUser(userDto);
+    public ResponseEntity<UserSingUp> saveUser(@Valid @RequestBody UserSingUpDto userSingUpDto) {
+         UserSingUp createdUserSingUp = this.userService.saveUser(userSingUpDto);
         return new ResponseEntity<>(createdUserSingUp, HttpStatus.CREATED);
     }
 

@@ -1,8 +1,9 @@
 package com.softwareharddata.bbetter.controller;
 
 import com.softwareharddata.bbetter.db.UserMongoDb;
+import com.softwareharddata.bbetter.db.UserMysqlDb;
 import com.softwareharddata.bbetter.model.UserSingUp;
-import com.softwareharddata.bbetter.model.UserDto;
+import com.softwareharddata.bbetter.model.UserSingUpDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,6 @@ import java.util.UUID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserSingUpControllerTest {
 
@@ -35,11 +34,11 @@ class UserSingUpControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
-    private UserMongoDb userMongoDb;
+    private UserMysqlDb userMysqlDb;
 
     @BeforeEach
     public void setup() {
-        userMongoDb.deleteAll();
+        userMysqlDb.deleteAll();
     }
 
     @Test
@@ -47,7 +46,7 @@ class UserSingUpControllerTest {
     public void saveTodo(){
         // GIVEN
         String email = UUID.randomUUID().toString();
-        UserDto userToPost = UserDto.builder()
+        UserSingUpDto userToPost = UserSingUpDto.builder()
                 .email(email)
                 .username("superUser")
                 .password("superUser-password")
@@ -68,7 +67,7 @@ class UserSingUpControllerTest {
         //assertTrue(userMongoDb.existsById(userToPost.getIdUserEmail()));
     }
 
-    @Test
+    /*@Test
     @DisplayName("Adding a user twice results in 400 (Bad Request)") // 409 (Conflict)
     public void addExistingUser(){
         //GIVEN
@@ -78,16 +77,16 @@ class UserSingUpControllerTest {
                 .username("superUser")
                 .password("superUser-password")
                 .build();
-        userMongoDb.save(createdUserSingUp);
+        userMysqlDb.save(createdUserSingUp);
 
-        UserDto sameUserID = UserDto.builder().email(email).build();
+        UserSingUpDto sameUserID = UserSingUpDto.builder().email(email).build();
 
         //WHEN
         ResponseEntity<UserSingUp> response = testRestTemplate.postForEntity(getUrl(), sameUserID, UserSingUp.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
-    }
+    }*/
 
 
 

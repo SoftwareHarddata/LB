@@ -1,10 +1,10 @@
 package com.softwareharddata.bbetter.service;
 
-import com.softwareharddata.bbetter.db.UserMongoDb;
+import com.softwareharddata.bbetter.db.UserDetailsMysqlDb;
 import com.softwareharddata.bbetter.db.UserMysqlDb;
 import com.softwareharddata.bbetter.exception.EntityAlreadyExistsException;
 import com.softwareharddata.bbetter.model.UserSingUp;
-import com.softwareharddata.bbetter.model.UserDto;
+import com.softwareharddata.bbetter.model.UserSingUpDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,8 @@ class UserSingUpServiceTest {
     //private final UserService userService = new UserService(userDb);
 
     private final UserMysqlDb userDb = mock(UserMysqlDb.class);
-    private final UserService userService = new UserService(userDb);
+    private final UserDetailsMysqlDb userDetailsMysqlDb = mock(UserDetailsMysqlDb.class);
+    private final UserService userService = new UserService(userDb, userDetailsMysqlDb);
 
     @Test
     @DisplayName("a new user should be added")
@@ -31,7 +32,7 @@ class UserSingUpServiceTest {
 
         when(userDb.existsById(email)).thenReturn(false);
 
-        UserDto userDto = UserDto.builder()
+        UserSingUpDto userSingUpDto = UserSingUpDto.builder()
                 .email(email)
                 .username("superUser")
                 .password("superUser-password")
@@ -46,7 +47,7 @@ class UserSingUpServiceTest {
         when(userDb.save(mockUserSingUp)).thenReturn(mockUserSingUp);
 
         //WHEN
-        UserSingUp actual = userService.saveUser(userDto);
+        UserSingUp actual = userService.saveUser(userSingUpDto);
 
         //THEN
         UserSingUp expectedUserSingUp = UserSingUp.builder()
@@ -64,14 +65,14 @@ class UserSingUpServiceTest {
         //GIVEN
         String email = UUID.randomUUID().toString();
         when(userDb.existsById(email)).thenReturn(true);
-        UserDto userDto = UserDto.builder()
+        UserSingUpDto userSingUpDto = UserSingUpDto.builder()
                 .email(email)
                 .username("superUser")
                 .password("superUser-password")
                 .build();
 
         //WHEN
-        assertThrows(EntityAlreadyExistsException.class, () -> userService.saveUser(userDto));
+        assertThrows(EntityAlreadyExistsException.class, () -> userService.saveUser(userSingUpDto));
 
         //THEN
         verify(userDb, never()).save(any());

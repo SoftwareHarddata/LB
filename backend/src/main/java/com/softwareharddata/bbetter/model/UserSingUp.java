@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 //import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+//import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 @Data
 @Entity
