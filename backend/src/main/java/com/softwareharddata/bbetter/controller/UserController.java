@@ -38,9 +38,8 @@ public class UserController {
     // todo: tests
     @GetMapping("/{id}")
     public ResponseEntity<UserSingUp> getUserById(@PathVariable String id){
-        UserSingUp userAllInfos = userService.getUserById(id);
-        return new ResponseEntity<>(userAllInfos, HttpStatus.OK);
+        UserSingUp userSingUp = userService.getUserById(id);
+        return new ResponseEntity<>(userSingUp, HttpStatus.OK);
     }
-
 
 }

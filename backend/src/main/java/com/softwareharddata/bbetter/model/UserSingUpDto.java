@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Builder
 public class UserSingUpDto {
-    @NotBlank //@NotEmpty
+    @NotBlank
     private String email;
     @NotBlank
     private String username;

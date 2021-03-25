@@ -16,8 +16,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 //@Document(collection = "user")
-@Entity
-@Table(name="user_details")
 public class UserAllInfos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +36,14 @@ public class UserAllInfos implements Serializable {
     private int plz;
     private String email;
     private String username;
+
+
+
+
+
+
+
+
     // private ArrayList<String> interests;
     // private ArrayList<String> extraInfos;
 

@@ -1,18 +1,22 @@
 package com.softwareharddata.bbetter.controller;
 
-import com.softwareharddata.bbetter.db.UserMongoDb;
 import com.softwareharddata.bbetter.db.UserMysqlDb;
 import com.softwareharddata.bbetter.model.UserSingUp;
 import com.softwareharddata.bbetter.model.UserSingUpDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+//import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 
 import java.util.UUID;
@@ -20,7 +24,10 @@ import java.util.UUID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ExtendWith(SpringExtension.class)
+//@ContextConfiguration(classes = { SpringTestConfiguration.class })
+@DataJpaTest
 class UserSingUpControllerTest {
 
     @LocalServerPort
@@ -41,9 +48,9 @@ class UserSingUpControllerTest {
         userMysqlDb.deleteAll();
     }
 
-    @Test
+    /*@Test
     @DisplayName("Post to /api/customer adds a new user to the database")
-    public void saveTodo(){
+    public void saveUser(){
         // GIVEN
         String email = UUID.randomUUID().toString();
         UserSingUpDto userToPost = UserSingUpDto.builder()
@@ -62,12 +69,14 @@ class UserSingUpControllerTest {
                 .username("superUser")
                 .password("superUser-password")
                 .build();
-        assertThat(response.getBody(), is(expectedUserSingUp));
+        //assertThat(response.getBody(), is(expectedUserSingUp));
         //assertThat(userMongoDb.findById(expectedUserSingUp.getIdUserEmail()).get(), is(expectedUserSingUp));
         //assertTrue(userMongoDb.existsById(userToPost.getIdUserEmail()));
-    }
 
-    /*@Test
+
+    }*/
+
+    @Test
     @DisplayName("Adding a user twice results in 400 (Bad Request)") // 409 (Conflict)
     public void addExistingUser(){
         //GIVEN
@@ -86,7 +95,7 @@ class UserSingUpControllerTest {
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
-    }*/
+    }
 
 
 

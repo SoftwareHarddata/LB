@@ -1,7 +1,9 @@
 package com.softwareharddata.bbetter.controller;
 
+import com.softwareharddata.bbetter.model.UserAllInfos;
 import com.softwareharddata.bbetter.model.UserDetails;
 import com.softwareharddata.bbetter.model.UserDetailsDto;
+import com.softwareharddata.bbetter.model.UserSingUp;
 import com.softwareharddata.bbetter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,5 +58,18 @@ public class UserDetailsController {
         return errors;
     }
 
+    /*// todo: tests
+    @GetMapping("/userinfos/{id}")
+    public ResponseEntity<UserAllInfos> getUserAllInfosById(@PathVariable String id){
+        UserAllInfos userAllInfos = userService.getUserAllInfosById(id);
+        return new ResponseEntity<>(userAllInfos, HttpStatus.OK);
+    }*/
+
+    // todo: tests
+    @GetMapping("/userinfos/{id}")
+    public ResponseEntity <List<UserAllInfos>> getUserAllInfosById(@PathVariable String id){
+        List<UserAllInfos> userAllInfos = userService.getUserAllInfosById(id);
+        return new ResponseEntity<>(userAllInfos, HttpStatus.OK);
+    }
 
 }

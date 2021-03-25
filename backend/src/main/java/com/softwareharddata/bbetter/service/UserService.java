@@ -33,6 +33,7 @@ public class UserService {
 
         CheckExistingUser(userSingUpDto);
 
+        // todo: auslagern
         String id = UUID.randomUUID().toString();
 
         UserSingUp userSingUp = UserSingUp.builder()
@@ -40,6 +41,7 @@ public class UserService {
                 .username(userSingUpDto.getUsername())
                 .password(userSingUpDto.getPassword())
                 .idUserSingUp(id)
+                .authority("USER")
                 .build();
         return userDb.save(userSingUp);
     }
@@ -90,4 +92,10 @@ public class UserService {
         return userDetailsMysqlDb.save(userDetails);
     }
 
+    // todo: tests
+    public List<UserAllInfos> getUserAllInfosById(String id) {
+        return userDetailsMysqlDb.getUserAllInfos(id);
+                //.orElseThrow(() -> new EntityNotFoundException(String.format("User not found with id: %s", id)));
+        //.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "userSingUp not found"));
+    }
 }

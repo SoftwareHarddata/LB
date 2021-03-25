@@ -28,6 +28,7 @@ public class UserSingUp implements Serializable {
     private String email;
     private String username;
     private String password;
+    private String authority;
 
     //private Customize customize;
     //private boolean isPremium;

@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.softwareharddata</groupId>
     <artifactId>bbetter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -15,7 +17,16 @@
     <description>Capstone project with Spring and react</description>
     <properties>
         <java.version>15</java.version>
+        <!-- for mysql test via docker -->
+        <mysql.test.port>3306</mysql.test.port>
+        <mysql.test.pw>root</mysql.test.pw>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,7 +77,7 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
-            <scope>test</scope>
+            <scope>runtime</scope>
         </dependency>
 
 
@@ -96,6 +107,79 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!-- for mysql test via docker -->
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.34.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>mysql:5.5.53</name>
+                            <alias>mysql</alias>
+                            <run>
+                                <env>
+                                    <MYSQL_ROOT_PASSWORD>${mysql.test.pw}</MYSQL_ROOT_PASSWORD>
+                                </env>
+                                <ports>
+                                    <port>${mysql.test.port}:3306</port>
+                                </ports>
+                                <wait>
+                                    <time>8000</time>
+                                </wait>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <includes>
+                        <include>**/*IT.*</include>
+                    </includes>
+                    <systemPropertyVariables>
+                        <mysql.port>${mysql.test.port}</mysql.port>
+                        <mysql.pw>${mysql.test.pw}</mysql.pw>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*IT.*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <!-- end:for mysql test via docker -->
         </plugins>
     </build>
 
