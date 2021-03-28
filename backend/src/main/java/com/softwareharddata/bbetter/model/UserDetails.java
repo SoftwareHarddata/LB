@@ -1,9 +1,6 @@
 package com.softwareharddata.bbetter.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 //@Document(collection = "user")
 @Entity
 @Table(name="user_details")

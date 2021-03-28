@@ -30,9 +30,9 @@ export default function ContainerComponent (){
     return (
         <div className={classes.root}>
             <NavbarComponent handleDrawerToggle={handleDrawerToggle}/>
-
             <div className={classes.content}>
-                <div className={classes.toolbar}></div>
+            <div className={classes.toolbar}></div>
+
                 <Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                     ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum

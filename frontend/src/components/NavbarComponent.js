@@ -36,7 +36,7 @@ export default function NavbarComponent (props){
                         className={classes.menuButton}>
                         <AppleIcon />
                     </IconButton>
-                    <Typography variant='h6' className={classes.title}>
+                    <Typography variant='subtitle1' className={classes.title}>
                         Hallo User
                     </Typography>
                     <Button variant='text' color='inherit'>

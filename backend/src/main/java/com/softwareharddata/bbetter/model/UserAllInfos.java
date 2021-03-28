@@ -1,9 +1,6 @@
 package com.softwareharddata.bbetter.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,21 +9,14 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Data
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@Document(collection = "user")
-public class UserAllInfos implements Serializable {
+public class UserAllInfos{
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name="id_user")
     private String idUser;
-    @Column(name="id_user_singup")
     private String idUserSingUp;
-
-    @Column(name="is_premium")
     private boolean isPremium;
     private String age;
     private String sector;
@@ -36,7 +26,6 @@ public class UserAllInfos implements Serializable {
     private int plz;
     private String email;
     private String username;
-
 
 
 

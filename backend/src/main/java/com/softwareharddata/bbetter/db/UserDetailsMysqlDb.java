@@ -16,11 +16,12 @@ import java.util.Optional;
 @Repository
 public interface UserDetailsMysqlDb extends CrudRepository<UserDetails,String> {
 
-    @Query(value="SELECT user.user_details.* " +
-            "FROM user.user_details \n" +
-            "LEFT JOIN user.user_singup \n" +
-            "ON user.user_details.id_user_singup=user.user_singup.id_user_singup \n"
-            +"WHERE user.user_details.id_user_singup = :id_user_singup"
+    @Query(value="SELECT new com.softwareharddata.bbetter.model.UserAllInfos(d.*, s.email, s.username) " +
+            "FROM user.user_details d \n" +
+            "LEFT JOIN user.user_singup s \n" +
+            "ON d.id_user_singup=s.id_user_singup \n"
+            +"WHERE d.id_user_singup = 2 "
+
 
             ,nativeQuery = true)
     List<UserAllInfos> getUserAllInfos (@Param("id_user_singup") String id_user_singup);
