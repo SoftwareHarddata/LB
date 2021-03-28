@@ -28,15 +28,15 @@ export default function MUI_Card({randomItem}) {
         <Card className={classes.root}>
             <CardActionArea>
                 <CardHeader>
-                    <Titel><h4>{randomItem.titel}</h4></Titel>
-                    <Category>{randomItem.category}</Category>
+                    <Titel><h4>Titel</h4></Titel>
+                    <Category>category</Category>
                 </CardHeader>
 
                 <CardContent>
                     <Content>
-                        <h5>{randomItem.subcategory}</h5>
+                        <h5>subcategory</h5>
                         <br/>
-                        <p>{randomItem.content}</p>
+                        <p>content</p>
                         <br/>
                         <br/>
                          Call to action!!!

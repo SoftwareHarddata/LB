@@ -62,12 +62,17 @@ export default function ContainerComponent (){
 
         </div>
 
-        <div>
+        {/*
+            <div>
             <form method="post" action="/logout">
                 <a href="#" onClick={this.parentNode.submit()}>Logout</a>
             </form>
-            {/* or a button from type submit*/}
+            //or a button from type submit
+
         </div>
+
+        */}
+
 
         </>
     )
