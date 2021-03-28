@@ -68,12 +68,12 @@ const Category = styled.div`
   text-align: center;
   flex-wrap: wrap;
 `
-
+//frage: @media
 const Titel = styled.div`
   display: flex;
   margin: 12px 0 0 12px;
   @media all and (min-width: 359px){
-    .h4{font-size: xxx-large;}
+    .h4{font-size: small;}
   }
 `
 
