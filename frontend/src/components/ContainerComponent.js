@@ -28,6 +28,7 @@ export default function ContainerComponent (){
         setMobileOpen(!mobileOpen)
     }
     return (
+        <>
         <div className={classes.root}>
             <NavbarComponent handleDrawerToggle={handleDrawerToggle}/>
             <div className={classes.content}>
@@ -60,5 +61,14 @@ export default function ContainerComponent (){
 
 
         </div>
+
+        <div>
+            <form method="post" action="/logout">
+                <a href="#" onClick={this.parentNode.submit()}>Logout</a>
+            </form>
+            {/* or a button from type submit*/}
+        </div>
+
+        </>
     )
 }
