@@ -1,6 +1,6 @@
 import Button from "@material-ui/core/Button";
 import {makeStyles, ThemeProvider} from "@material-ui/core/styles";
-import theme from "../themeConfig";
+import theme from "../../themeConfig";
 
 const useStyles = makeStyles({
     buttonSend: {

@@ -80,7 +80,7 @@ class UserSingUpControllerTest {
     @DisplayName("Adding a user twice results in 400 (Bad Request)") // 409 (Conflict)
     public void addExistingUser(){
         //GIVEN
-        String email = UUID.randomUUID().toString();
+        String email = "superUser@email.com";
         UserSingUp createdUserSingUp = UserSingUp.builder()
                 .email(email)
                 .username("superUser")

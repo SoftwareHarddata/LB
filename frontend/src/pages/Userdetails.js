@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import {loginUser} from "../services/loginService";
 import {userDetails} from "../services/userDetailsService";
+import styled from "styled-components/macro";
 
 const ages = [
     {
@@ -107,6 +107,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Userdetails() {
+    const [requestDetailsError, setRequestDetails ] = useState('')
+
     const classes = useStyles();
     const [age, setAge] = React.useState('');
     const [sector, setSector] = React.useState('');
@@ -134,29 +136,24 @@ export default function Userdetails() {
         console.log('loading data...' + ' ' +userData.age+ ' ' + userData.sector+ ' ' + userData.department
             + ' ' + userData.occupation+ ' ' + userData.company_size+ ' ' + userData.plz)
 
-        /* Fehler!
-        setUserData([
-            ...userData,
-            {age: userData.age, sector: userData.sector,
-                department: userData.department, occupation: userData.occupation
-                //company_size: company_size
-            }
-        ])*/
+        // todo: ?
+        if (requestDetailsError === '') {
 
-        userDetails(userData.age, userData.sector, userData.department,
-            userData.occupation, userData.company_size, userData.plz).then()
+            userDetails(userData.age, userData.sector, userData.department,
+                userData.occupation, userData.company_size, userData.plz).catch((error) => setRequestDetails(error.response.data))
 
-        e.target.reset()
-        setAge('')
-        setSector('')
-        setDepartment('')
-        setOccupation('')
-        setCompany_size('')
-        setPlz(99999)
-        setUserData({
-            age: '', sector: '',
-            department: '', occupation: '', company_size: '', plz: 99999
-        })
+            e.target.reset()
+            setAge('')
+            setSector('')
+            setDepartment('')
+            setOccupation('')
+            setCompany_size('')
+            setPlz(99999)
+            setUserData({
+                age: '', sector: '',
+                department: '', occupation: '', company_size: '', plz: 99999
+            })
+        }
 
     }
 
@@ -168,7 +165,7 @@ export default function Userdetails() {
         <form onSubmit={ saveData } className={classes.root} autoComplete="off">
             <div>
                 <TextField
-
+                    required
                     id="age"
                     name="age"
                     select
@@ -184,6 +181,10 @@ export default function Userdetails() {
                         </MenuItem>
                     ))}
                 </TextField>
+
+                {
+                    requestDetailsError.age && <> <br/> <ErrorMessage> age {requestDetailsError.age} </ErrorMessage> <br/> </>
+                }
 
                 <TextField
                     id="sector"
@@ -220,7 +221,7 @@ export default function Userdetails() {
                 </TextField>
 
                 <TextField
-
+                    required
                     id="occupation"
                     name="occupation"
                     select
@@ -236,6 +237,9 @@ export default function Userdetails() {
                         </MenuItem>
                     ))}
                 </TextField>
+                {
+                    requestDetailsError.occupation && <> <br/> <ErrorMessage> occupation {requestDetailsError.occupation} </ErrorMessage> <br/> </>
+                }
 
                 <TextField
                     //required
@@ -267,12 +271,24 @@ export default function Userdetails() {
                     variant="filled"
                 >
                 </TextField>
+                {
+                    requestDetailsError.plz && <> <br/> <ErrorMessage> plz {requestDetailsError.plz} </ErrorMessage> <br/> <br/> </>
+                }
 
             </div>
 
             <button className="btn btn-primary btn-block" type="submit">Agregar</button>
-
         </form>
         </>
     );
 }
+
+const ErrorMessage = styled.span`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: crimson;
+  background: darkgrey;
+  border: none;
+  border-radius: 3px;
+  font-size: x-small;
+`;

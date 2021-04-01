@@ -3,6 +3,7 @@ import {Hidden, makeStyles, Typography} from "@material-ui/core";
 import MyDrawer from "../pages/MyDrawer";
 import NavbarComponent from "./NavbarComponent";
 import HiddenComponent from "./HiddenComponent";
+import {Link} from "react-router-dom";
 
 const drawerWidth =240;
 
@@ -19,7 +20,7 @@ const myStyles = makeStyles(theme => ({
 
 }))
 
-export default function ContainerComponent (){
+export default function Welcome (){
 
     const classes = myStyles()
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -60,18 +61,22 @@ export default function ContainerComponent (){
             </Hidden>
 
 
+
         </div>
 
-        {/*
+
             <div>
+                <button> <Link to="/home">Home</Link> </button>
+
+                {/*
             <form method="post" action="/logout">
                 <a href="#" onClick={this.parentNode.submit()}>Logout</a>
             </form>
             //or a button from type submit
-
+            */}
         </div>
 
-        */}
+
 
 
         </>

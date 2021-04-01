@@ -26,10 +26,10 @@ public class UserServiceExceptionHandler {
     }
 
     @ExceptionHandler(EntityAlreadyExistsException.class)
-    public ResponseEntity<String> handleEntityAlreadyExistsException(EntityAlreadyExistsException ex){
+    public ResponseEntity<ErrorDto> handleEntityAlreadyExistsException(EntityAlreadyExistsException ex){
         LOGGER.error(ex.getMessage());
 
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(new ErrorDto(ex.getMessage()), HttpStatus.CONFLICT);
     }
 
 

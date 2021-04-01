@@ -27,16 +27,11 @@ export default function Home ({messages}){
     }
 
     useEffect(() => {
-        // logic, filter, .....
+        // logic, filter, ...
         //const gesundheitList = messages.filter((message) => message.category=== 'Gesundheit')
         const randomOne = messages[Math.floor(Math.random()*messages.length)];
         setRandomItem(randomOne)
-
-    }, [randomItem])
-
-
-
-
+    }, [messages])
 
 
 
@@ -74,6 +69,7 @@ const AppContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: #d6cbbc;
+  
 `
 
 const Content = styled.div`

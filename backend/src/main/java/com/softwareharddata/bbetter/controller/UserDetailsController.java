@@ -65,7 +65,7 @@ public class UserDetailsController {
         return new ResponseEntity<>(userAllInfos, HttpStatus.OK);
     }*/
 
-    // todo: tests
+    // todo: tests; sollte keine List zurück geben, sondern nur ein user
     @GetMapping("/userinfos/{id}")
     public ResponseEntity <List<UserAllInfos>> getUserAllInfosById(@PathVariable String id){
         List<UserAllInfos> userAllInfos = userService.getUserAllInfosById(id);

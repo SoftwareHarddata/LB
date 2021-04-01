@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserSingUp> saveUser(@Valid @RequestBody UserSingUpDto userSingUpDto) {
+    public ResponseEntity<UserSingUp> saveUser(@Valid @RequestBody UserSingUpDto userSingUpDto ) {
          UserSingUp createdUserSingUp = this.userService.saveUser(userSingUpDto);
         return new ResponseEntity<>(createdUserSingUp, HttpStatus.CREATED);
     }
@@ -41,5 +42,13 @@ public class UserController {
         UserSingUp userSingUp = userService.getUserById(id);
         return new ResponseEntity<>(userSingUp, HttpStatus.OK);
     }
+
+    @GetMapping("me")
+    public ResponseEntity<UserSingUp> getLoggedInUser(Principal principal){
+        UserSingUp userSingUp = userService.getUserByUsername(principal.getName());
+        return new ResponseEntity<>(userSingUp, HttpStatus.OK);
+    }
+
+
 
 }

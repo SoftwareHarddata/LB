@@ -12,6 +12,7 @@ export default function SingUp() {
     const { register, errors, handleSubmit } = useForm();
     const initialFormState = { userName:'', userPassword: '', email: '' }
     const [singUpData, setSingUpData] = useState([])
+    const [conflictError, setConflictError] = useState('')
 
 
     const onSubmit = (data, e) =>{
@@ -25,7 +26,7 @@ export default function SingUp() {
         if (!data.userName && !data.userPassword && !data.email) {
             return
         }
-        loginUser(data.userName, data.userPassword, data.email).then()
+        loginUser(data.userName, data.userPassword, data.email).catch((error) => setConflictError(error.response.data.message))
 
         // clean fields
         e.target.reset();    }
@@ -121,6 +122,10 @@ export default function SingUp() {
                 />
                 <span>
                     {errors?.email?.message}
+                </span>
+
+                <span>
+                    {conflictError}
                 </span>
 
                 <button type="submit">login</button>

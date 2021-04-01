@@ -1,22 +1,22 @@
 package com.softwareharddata.bbetter.model;
 
+import com.softwareharddata.bbetter.security.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-//import org.springframework.data.annotation.Id;
-import javax.persistence.*;
 
-//import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
-@Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @Builder
-//@Document(collection = "users")
 @Table(name="user_singup")
 public class UserSingUp implements Serializable {
 
@@ -25,18 +25,17 @@ public class UserSingUp implements Serializable {
     @Id
     @Column(name="id_user_singup")
     private String idUserSingUp;
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
     private String authority;
 
-    //private Customize customize;
-    //private boolean isPremium;
-    //private ArrayList<String> favoriteList;
-    //private ArrayList<String> clickedLike;
-    //private ArrayList<String> clickedMoreInfos;
-    //private ArrayList<String> clickedContact;
-    //private ArrayList<String> clicked; // tel, e-mail, video, office
-    //private boolean hasStress;
+    @OneToMany
+    @JoinColumn(name = "id_user_singup") //in table: foreign key
+    private List<Role> roles;
+
 
 }

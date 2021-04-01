@@ -1,6 +1,6 @@
 import Button from "@material-ui/core/Button";
 import {makeStyles, ThemeProvider} from "@material-ui/core/styles";
-import theme from "../themeConfig";
+import theme from "../../themeConfig";
 import {Hidden} from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -18,12 +18,13 @@ const useStyles = makeStyles({
     },
 })
 
-export default function MYButton({name, iconName}) {
+export default function MYButton({name, iconName, onClick}) {
     const classes = useStyles();
     return(
         <ThemeProvider theme={theme}>
             <Button className={classes.buttonSend}
-                    text
+                    type="button"
+                    onClick={onClick}
                     startIcon={iconName}>
                 <Hidden xsDown>{name}</Hidden>
             </Button>

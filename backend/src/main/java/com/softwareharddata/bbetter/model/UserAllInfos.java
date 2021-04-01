@@ -13,19 +13,29 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
+@Table(name="user_allinfos")
 public class UserAllInfos{
-
-    private String idUser;
+    @Id
+    @Column(name="id_user_singup")
     private String idUserSingUp;
-    private boolean isPremium;
-    private String age;
-    private String sector;
-    private String department;
-    private String occupation;
-    private String company_size;
-    private int plz;
+
     private String email;
     private String username;
+    private String authority;
+
+    @Column(name="id_user")
+    private String idUser;
+    private String age;
+    @Column(name="company_size")
+    private String companySize;
+    private String department;
+    @Column(name="is_premium")
+    private boolean isPremium;
+    private String occupation;
+    private int plz;
+    private String sector;
+
 
 
 

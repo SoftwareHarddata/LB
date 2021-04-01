@@ -22,14 +22,17 @@ class UserSingUpServiceTest {
 
     private final UserMysqlDb userDb = mock(UserMysqlDb.class);
     private final UserDetailsMysqlDb userDetailsMysqlDb = mock(UserDetailsMysqlDb.class);
-    private final UserService userService = new UserService(userDb, userDetailsMysqlDb);
+    private final UserService userService = new UserService(userDb, userDetailsMysqlDb, null);
 
     @Test
     @DisplayName("a new user should be added")
     public void testSaveANewUser(){
         //GIVEN
         String email = UUID.randomUUID().toString();
+        String id = UUID.randomUUID().toString();
 
+
+        //when(userDb.existsById(email)).thenReturn(false);
         when(userDb.existsById(email)).thenReturn(false);
 
         UserSingUpDto userSingUpDto = UserSingUpDto.builder()
@@ -42,6 +45,8 @@ class UserSingUpServiceTest {
                 .email(email)
                 .username("superUser")
                 .password("superUser-password")
+                .idUserSingUp(id)
+                .authority("USER")
                 .build();
 
         when(userDb.save(mockUserSingUp)).thenReturn(mockUserSingUp);

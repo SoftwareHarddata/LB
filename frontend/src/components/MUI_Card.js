@@ -8,35 +8,56 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styled from "styled-components/macro";
-import Button_MUI from "./Button_MUI";
+import Button_MUI from "./Buttons/Button_MUI";
 import createTypography from "@material-ui/core/styles/createTypography";
-import MYButton from "./MyButton";
+import MYButton from "./Buttons/MyButton";
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';import FavoriteIcon from '@material-ui/icons/Favorite';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import InfoIcon from '@material-ui/icons/Info';
+import SimpleModal from "./SimpleModal";
+import LikeButtonWithSnackbar from "./Buttons/LikeButtonWithSnackbar";
 
 const useStyles = makeStyles({
     root: {
         maxWidth: '80%',
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap'
     },
 });
 
 export default function MUI_Card({randomItem}) {
     const classes = useStyles();
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     return (
         <Card className={classes.root}>
+            <div>
             <CardActionArea>
                 <CardHeader>
-                    <Titel><h4>Titel</h4></Titel>
-                    <Category>category</Category>
+                    <Titel><h4>{randomItem?.titel}</h4></Titel>
+                    <Category>{randomItem?.category}</Category>
                 </CardHeader>
 
                 <CardContent>
                     <Content>
-                        <h5>subcategory</h5>
+                        <h5>{randomItem?.subcategory}</h5>
                         <br/>
-                        <p>content</p>
+                        <br/>
+                        <p>{randomItem?.content}</p>
                         <br/>
                         <br/>
                          Call to action!!!
@@ -44,12 +65,14 @@ export default function MUI_Card({randomItem}) {
                 </CardContent>
             </CardActionArea>
             <CardButtons>
-                <MYButton name='mehr davon' iconName={<ThumbUpIcon/>}/>
+                <LikeButtonWithSnackbar onClick={handleClick} onClose={handleClose} isOpen={open}/>
+                {/*<MYButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
                 <MYButton name='save' iconName={<FavoriteIcon/>}/>
-                <MYButton name='mehr infos' iconName={<InfoIcon/>}/>
                 <MYButton name='Experten' iconName={<ContactPhoneIcon/>}/>
+                <SimpleModal randomItem={randomItem}/>
             </CardButtons>
-        </Card>
+        </div>
+</Card>
     );
 }
 
@@ -88,4 +111,6 @@ const CardButtons = styled.div`
 const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  overflow: auto;
 `
