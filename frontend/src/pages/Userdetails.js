@@ -1,9 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import {userDetails} from "../services/userDetailsService";
 import styled from "styled-components/macro";
+import NavbarComponent from "../components/NavbarComponent";
+import {getLoggedUser} from "../services/userService";
+import {Link, NavLink, Redirect} from "react-router-dom";
+import {Hidden} from "@material-ui/core";
+import MyDrawer from "./MyDrawer";
 
 const ages = [
     {
@@ -103,25 +108,38 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: '25ch',
         },
+        //display: 'flex'
+    },
+    toolbar : theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        backgroundColor: theme.palette.background.paper,
     },
 }));
 
-export default function Userdetails() {
+export default function Userdetails({loggedUser}) {
     const [requestDetailsError, setRequestDetails ] = useState('')
 
-    const classes = useStyles();
     const [age, setAge] = React.useState('');
     const [sector, setSector] = React.useState('');
     const [department, setDepartment] = React.useState('');
     const [occupation, setOccupation] = React.useState('');
     const [userData, setUserData] = React.useState({
         age: '', sector: '',
-        department: '', occupation: '', company_size: '', plz: 99999
+        department: '', occupation: '', company_size: '', plz: 99999, idUserSingUp: loggedUser?.idUserSingUp
     });
     const [company_size, setCompany_size] = React.useState('');
     const [plz, setPlz] = React.useState(99999);
 
 
+    useEffect(() => {
+
+        console.log("from userdetails ...")
+        console.log("loggedUserData username.....")
+        console.log(loggedUser)
+        console.log(userData)
+    }, [userData])
 
 
 
@@ -140,7 +158,7 @@ export default function Userdetails() {
         if (requestDetailsError === '') {
 
             userDetails(userData.age, userData.sector, userData.department,
-                userData.occupation, userData.company_size, userData.plz).catch((error) => setRequestDetails(error.response.data))
+                userData.occupation, userData.company_size, userData.plz, userData.idUserSingUp).catch((error) => setRequestDetails(error.response.data))
 
             e.target.reset()
             setAge('')
@@ -159,8 +177,31 @@ export default function Userdetails() {
 
 //  todo: plz validieren (with react hooks form?), button ändern to Material UI, reset anpassen, unnötigen hooks löschen
 
+    const classes = useStyles();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen) }
+
     return (
-        <>
+        <div className={classes.root}>
+            <NavbarComponent handleDrawerToggle={handleDrawerToggle}
+                             loggedUser={loggedUser}/>
+            <div className={classes.toolbar}></div>
+            <Hidden lgDown>
+                <MyDrawer
+                    variant='permanent'
+                    open ={true}
+                />
+            </Hidden>
+
+            <Hidden xlUp>
+                <MyDrawer
+                    variant='temporary'
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                />
+            </Hidden>
+
         <h2>UserDetails Form</h2>
         <form onSubmit={ saveData } className={classes.root} autoComplete="off">
             <div>
@@ -277,9 +318,15 @@ export default function Userdetails() {
 
             </div>
 
-            <button className="btn btn-primary btn-block" type="submit">Agregar</button>
+            <button className="btn btn-primary btn-block" type="submit">Add</button>
         </form>
-        </>
+            <ButtonsNavigation>
+                <button> <Link to="/user/home">Home</Link> </button>
+
+                <button> <NavLink to={`/${loggedUser.username}`} activeClassName="active"> welcome </NavLink> </button>
+
+            </ButtonsNavigation>
+        </div>
     );
 }
 
@@ -291,4 +338,12 @@ const ErrorMessage = styled.span`
   border: none;
   border-radius: 3px;
   font-size: x-small;
+`;
+
+const ButtonsNavigation = styled.div`
+  padding: 0.5em;
+  background: seashell;
+  border: none;
+  display: flex;
+  justify-content: space-around;
 `;

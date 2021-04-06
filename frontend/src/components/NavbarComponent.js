@@ -3,6 +3,7 @@ import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core
 import {makeStyles} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AppleIcon from '@material-ui/icons/Apple';
+import {NavLink} from "react-router-dom";
 
 const drawerWidth =240;
 const useStyles = makeStyles(theme => ({
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
+// todo: logout Funktionalitaet
 export default function NavbarComponent (props){
     const classes = useStyles()
     return (
@@ -37,10 +39,10 @@ export default function NavbarComponent (props){
                         <AppleIcon />
                     </IconButton>
                     <Typography variant='subtitle1' className={classes.title}>
-                        Hallo User
+                        Hallo {props.loggedUser?.username}
                     </Typography>
                     <Button variant='text' color='inherit'>
-                        Login
+                        <NavLink to="/user/login" activeClassName="active"> logout </NavLink>
                     </Button>
                     <IconButton
                         onClick={()=> props.handleDrawerToggle()}

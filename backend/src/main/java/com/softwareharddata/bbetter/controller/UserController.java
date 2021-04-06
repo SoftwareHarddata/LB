@@ -43,12 +43,16 @@ public class UserController {
         return new ResponseEntity<>(userSingUp, HttpStatus.OK);
     }
 
-    @GetMapping("me")
-    public ResponseEntity<UserSingUp> getLoggedInUser(Principal principal){
-        UserSingUp userSingUp = userService.getUserByUsername(principal.getName());
+    @GetMapping("me/{username}")
+     public ResponseEntity<UserSingUp> getUserByUsername(@PathVariable String username){
+        UserSingUp userSingUp = userService.getUserByUsername(username);
         return new ResponseEntity<>(userSingUp, HttpStatus.OK);
     }
 
-
+    /*@GetMapping("me")
+    public ResponseEntity<UserSingUp> getLoggedInUser(Principal principal){
+        UserSingUp userSingUp = userService.getUserByUsername(principal.getName());
+        return new ResponseEntity<>(userSingUp, HttpStatus.OK);
+    }*/
 
 }

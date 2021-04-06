@@ -1,7 +1,8 @@
-import { Component, useState } from 'react'
+import React, { Component, useState } from 'react'
 import styled from 'styled-components/macro'
-import { loginUser } from '../services/loginService'
+import { singUpUser } from '../services/loginService'
 import {useForm} from "react-hook-form";
+import {Link, NavLink, Redirect} from "react-router-dom";
 
 
 export default function SingUp() {
@@ -15,6 +16,7 @@ export default function SingUp() {
     const [conflictError, setConflictError] = useState('')
 
 
+
     const onSubmit = (data, e) =>{
         console.log(data);
         console.log(data.userName)
@@ -26,12 +28,24 @@ export default function SingUp() {
         if (!data.userName && !data.userPassword && !data.email) {
             return
         }
-        loginUser(data.userName, data.userPassword, data.email).catch((error) => setConflictError(error.response.data.message))
+        singUpUser(data.userName, data.userPassword, data.email).catch((error) => setConflictError(error.response.data.message))
+            .then(response => {
+                alert("thank you very much. Now you can login");
+                window.location.href = '/user/login';
+            })
+        // todo: change alert design
+
 
         // clean fields
-        e.target.reset();    }
+        e.target.reset();
+        setConflictError('');
 
-    // Ab hier
+
+
+    }
+
+
+    // Ab hier 1test@email.com
 
 
     /*const handleSubmit = (event) => {
@@ -39,7 +53,7 @@ export default function SingUp() {
         if (!singUpData.userName && !singUpData.userPassword && !singUpData.email) {
             return
         }
-        loginUser(singUpData.userName, singUpData.userPassword, singUpData.email).then()
+        singUpUser(singUpData.userName, singUpData.userPassword, singUpData.email).then()
         setSingUpData(initialFormState)
     }*/
 
@@ -76,9 +90,13 @@ export default function SingUp() {
                         }
                     })}
                 />
-                <span>
+                {/*<span>
                     {errors?.userName?.message}
-                </span>
+                </span>*/}
+
+                {
+                    errors.userName && <ErrorMessage >{errors.userName.message}</ErrorMessage>
+                }
 
                 <input
                     placeholder="Password"
@@ -100,9 +118,10 @@ export default function SingUp() {
                         }
                     })}
                 />
-                <span>
-                    {errors?.userPassword?.message}
-                </span>
+
+                {
+                    errors.userPassword && <ErrorMessage>{errors.userPassword.message}</ErrorMessage>
+                }
 
                 <input
                     placeholder="Email"
@@ -120,16 +139,23 @@ export default function SingUp() {
                         }
                     })}
                 />
-                <span>
-                    {errors?.email?.message}
-                </span>
 
-                <span>
-                    {conflictError}
-                </span>
+                {
+                    errors.email && <ErrorMessage >{errors.email.message}</ErrorMessage>
+                }
 
-                <button type="submit">login</button>
+
+                {
+                    conflictError && <ErrorMessage >{conflictError}</ErrorMessage>
+                }
+
+                <button type="submit">Sing up</button>
             </Form>
+
+            <div>
+                Or login if you are already a user
+                <NavLink to="/user/login" activeClassName="active"> <button type="button">Login</button></NavLink>
+            </div>
         </>
     )
 }
@@ -149,3 +175,14 @@ const Form = styled.form`
     font-family: 'Al Nile';
   }
 `
+
+const ErrorMessage = styled.span`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: crimson;
+  //background: darkgrey;
+  border: none;
+  border-radius: 3px;
+  font-size: medium;
+`
+;

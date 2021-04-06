@@ -10,17 +10,22 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AppUserDetailsService appUserDetailsService;
+    private final JwtAuthFilter filter;
+
 
     @Autowired
-    public SecurityConfig(AppUserDetailsService appUserDetailsService) {
+    public SecurityConfig(AppUserDetailsService appUserDetailsService, JwtAuthFilter filter) {
         this.appUserDetailsService = appUserDetailsService;
+        this.filter = filter;
     }
 
     // to add users and set user configs for logins
@@ -43,17 +48,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // no more default user
         http.csrf().disable()
         .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/").permitAll()
-                .antMatchers(HttpMethod.GET,"/").permitAll()
+                //.antMatchers(HttpMethod.POST,"/").permitAll()
+                //.antMatchers(HttpMethod.GET,"/").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
-
-                /*.antMatchers("/admin/**")
-                    //.authenticated()
-                    .hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/customer").permitAll()
+                .antMatchers("/api/customer/me").permitAll() // todo: weg
+                .antMatchers("/admin/**")
+                    .authenticated()
+                    /*.hasRole("ADMIN")
                 .antMatchers("/")
                     .hasAnyRole("ADMIN", "USER")*/
-                .and().formLogin()
-                .and().httpBasic()
+                //.antMatchers("/api/**").authenticated() //optional
+                //.and().sessionManagement().disable()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+
+                /*.and().formLogin()
+                .and().httpBasic()*/
                 ;
 
     }

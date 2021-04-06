@@ -3,13 +3,13 @@ import styled from 'styled-components/macro'
 import SingUp from "../components/SingUp";
 import LoginComponent from "../components/LoginComponent";
 
-function Login() {
+function Login({setToken, token}) {
   return (
     <PageLayout>
       <Header>
       </Header>
         <section>
-            <LoginComponent/>
+            <LoginComponent token={token} setToken={setToken}/>
         </section>
         <Footer>
             <p>footer</p>

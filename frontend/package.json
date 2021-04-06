@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.8.3",
     "prop-types": "latest",
     "react": "^17.0.1",
+    "react-awesome-slider": "^4.1.0",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.4",
     "react-material-ui-carousel": "^2.2.2",

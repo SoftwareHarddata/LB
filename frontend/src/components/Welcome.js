@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Hidden, makeStyles, Typography} from "@material-ui/core";
 import MyDrawer from "../pages/MyDrawer";
 import NavbarComponent from "./NavbarComponent";
 import HiddenComponent from "./HiddenComponent";
-import {Link} from "react-router-dom";
+import {Link, NavLink, useParams} from "react-router-dom";
+import styled from "styled-components/macro";
+import * as userApi from "../services/userService";
+import {getLoggedUser} from "../services/userService";
 
 const drawerWidth =240;
 
@@ -20,7 +23,28 @@ const myStyles = makeStyles(theme => ({
 
 }))
 
-export default function Welcome (){
+export default function Welcome ({token, setLoggedUser, loggedUser}){
+
+    const { username } = useParams();
+
+    const [loggedUserData, setLoggedUserData] = React.useState([]);
+
+
+    useEffect(() => {
+        getLoggedUser(username, token).then((loadedUser) => {
+            setLoggedUser(loadedUser)
+            setLoggedUserData(loadedUser)
+            console.log(loggedUserData)
+            console.log("..........")
+            console.log(loggedUser)
+        })
+
+        //setLoggedUserData(loggedUser)
+    },  [token])
+
+
+
+
 
     const classes = myStyles()
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -31,7 +55,9 @@ export default function Welcome (){
     return (
         <>
         <div className={classes.root}>
-            <NavbarComponent handleDrawerToggle={handleDrawerToggle}/>
+            <NavbarComponent handleDrawerToggle={handleDrawerToggle}
+                             loggedUserData={loggedUserData} loggedUser={loggedUser}
+                             />
             <div className={classes.content}>
             <div className={classes.toolbar}></div>
 
@@ -41,7 +67,7 @@ export default function Welcome (){
                     facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
                     gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
                     donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis.
+                    adipiscing bibendum est ultricies integer quis...
                 </Typography>
             </div>
 
@@ -60,13 +86,13 @@ export default function Welcome (){
                 />
             </Hidden>
 
-
-
         </div>
 
 
-            <div>
-                <button> <Link to="/home">Home</Link> </button>
+            <ButtonsNavigation>
+                <button> <Link to="/user/home">Home</Link> </button>
+
+                <button> <NavLink to="/user/details" activeClassName="active"> profil </NavLink> </button>
 
                 {/*
             <form method="post" action="/logout">
@@ -74,7 +100,7 @@ export default function Welcome (){
             </form>
             //or a button from type submit
             */}
-        </div>
+        </ButtonsNavigation>
 
 
 
@@ -82,3 +108,11 @@ export default function Welcome (){
         </>
     )
 }
+
+const ButtonsNavigation = styled.div`
+  padding: 0.5em;
+  background: seashell;
+  border: none;
+  display: flex;
+  justify-content: space-around;
+`;

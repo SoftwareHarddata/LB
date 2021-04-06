@@ -11,19 +11,31 @@ import Welcome from "./components/Welcome";
 import * as messageApi from './services/messageService'
 import MessageDetails from "./components/MessageDetails";
 import Login from "./pages/Login";
-import MessageDetailsMUI from "./components/MessageDetailsMUI";
+import * as userApi from "./services/userService";
 
 
 
 function App() {
 
     const [messages, setMessages] = useState([])
-
+    const [token, setToken] = useState(undefined);
+    //const [loggedUserData, setLoggedUserData] = useState([])
+    const [loggedUser, setLoggedUser] = useState([])
 
 
     useEffect(() => {
-        messageApi.getMessages().then((loadedMessages) => setMessages(loadedMessages))
+        messageApi.getMessages(token).then((loadedMessages) => setMessages(loadedMessages))
     }, [])
+
+
+    /*
+        useEffect(() => {
+            userApi.loggedUser(token).then((loadedUser) => setLoggedUserData(loadedUser))
+         [])
+
+        /*
+
+         */
 
 
 
@@ -36,20 +48,24 @@ function App() {
                 <SingUpPage/>
             </Route>
             <Route exact path="/user/login">
-                <Login/>
+                <Login setToken={setToken} token={token} />
             </Route>
-            <Route exact path="/">
-                <Welcome/>
-            </Route>
-            <Route exact path="/home">
-                <Home messages={messages} />
+            <Route exact path="/:username">
+                <Welcome setLoggedUser={setLoggedUser} loggedUser={loggedUser} token={token}/>
             </Route>
             <Route exact path="/user/details">
-                <Userdetails/>
+                <Userdetails token={token} loggedUser={loggedUser}/>
             </Route>
 
-            <Route exact path="/message">
-                <MessageDetails messages={messages}/>
+            <Route exact path="/user/home">
+                <Home messages={messages} token={token} loggedUser={loggedUser}/>
+            </Route>
+            <Route exact path="/user/messages">
+                <MessageDetails messages={messages} token={token} loggedUser={loggedUser}/>
+            </Route>
+            {/*todo: category, favoriten, experten, suchfunktion, details*/}
+            <Route exact path="category/:category">
+                <Home messages={messages} token={token} loggedUser={loggedUser}/>
             </Route>
         </Switch>
     </Router>

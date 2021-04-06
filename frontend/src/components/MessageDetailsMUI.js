@@ -58,7 +58,7 @@ export default function MessageDetailsMUI ({messages}){
                 <div className={classes.toolbar}></div>
                 <Carousel >
                     <AppContainer>
-                    {messages.map((watchListItem) => (
+                    {messages?.map((watchListItem) => (
                         <MUI_Card messages={messages} randomItem={watchListItem}/>
                 ))}
                     </AppContainer>

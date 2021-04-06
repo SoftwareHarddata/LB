@@ -15,6 +15,7 @@ import javax.validation.constraints.*;
 public class UserDetailsDto {
     @NotBlank
     private String age;
+    private String idUserSingUp;
     private String sector;
     private String department;
     @NotBlank

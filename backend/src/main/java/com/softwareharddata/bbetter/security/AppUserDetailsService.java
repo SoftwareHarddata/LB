@@ -31,6 +31,7 @@ public class AppUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //todo: findByUsername statt findFirstByUsername
         Optional<UserSingUp> appUser = this.userDb.findFirstByUsername(username);
 
         if (appUser.isEmpty()){

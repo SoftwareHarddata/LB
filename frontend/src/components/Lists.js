@@ -15,6 +15,7 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {Link} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +50,7 @@ export default function Lists (){
                         primary='Favoriten' />
                 </ListItem>
 
+                <Link to="/user/messages">
                 <ListItem button>
                     <ListItemIcon>
                         <SearchIcon fontSize='default'/>
@@ -56,6 +58,8 @@ export default function Lists (){
                     <ListItemText
                         primary='Entdecken' />
                 </ListItem>
+                </Link>
+
                 <Divider/>
 
                 <div className={classes.nested}>
@@ -79,7 +83,7 @@ export default function Lists (){
                             <LaptopMacIcon fontSize='small'/>
                         </ListItemIcon>
                         <ListItemText
-                            secondary='Karriere' />
+                            secondary='Berufs- & Privatleben' />
                     </ListItem>
                     <ListItem button>
                         <ListItemIcon>

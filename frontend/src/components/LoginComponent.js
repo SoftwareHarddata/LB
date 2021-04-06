@@ -1,17 +1,22 @@
-import { Component, useState } from 'react'
+import React, { Component, useState } from 'react'
 import styled from 'styled-components/macro'
-import { loginUser } from '../services/loginService'
+import {loginUser, singUpUser} from '../services/loginService'
 import {useForm} from "react-hook-form";
+import {Link, NavLink, Redirect} from 'react-router-dom';
+import {getLoggedUser, loggedUser} from "../services/userService";
 
 
-export default function LoginComponent() {
+export default function LoginComponent({setToken, token}) {
     //const [userName, setUserName] = useState('')
     //const [userPassword, setUserPassword] = useState('')
     //const [email, setUserEmail] = useState('')
 
     const { register, errors, handleSubmit } = useForm();
-    const initialFormState = { userName:'', userPassword: '', email: '' }
+    //const initialFormState = { userName:'', userPassword: '' }
     const [singUpData, setSingUpData] = useState([])
+    const [conflictError, setConflictError] = useState('')
+
+
 
 
     const onSubmit = (data, e) =>{
@@ -25,10 +30,18 @@ export default function LoginComponent() {
         if (!data.userName && !data.userPassword) {
             return
         }
-        loginUser(data.userName, data.userPassword).then()
+        loginUser(data.userName, data.userPassword).then(setToken).catch((error) => setConflictError("username oder password stimmen nicht überein"))
 
         // clean fields
-        e.target.reset();    }
+        e.target.reset();
+    }
+
+    if (token) {
+        console.log("token")
+        console.log("singUpData ...")
+        console.log("singUpData[0][\"userName\"] "+singUpData[0]["userName"])
+        return <Redirect to={`/${singUpData[0]["userName"]}`}/>
+    }
 
     // Ab hier
 
@@ -38,7 +51,7 @@ export default function LoginComponent() {
         if (!singUpData.userName && !singUpData.userPassword && !singUpData.email) {
             return
         }
-        loginUser(singUpData.userName, singUpData.userPassword, singUpData.email).then()
+        singUpUser(singUpData.userName, singUpData.userPassword, singUpData.email).then()
         setSingUpData(initialFormState)
     }*/
 
@@ -63,7 +76,7 @@ export default function LoginComponent() {
                     ref={register({
                         required: {
                             value: true,
-                            message: 'Username bitte eingeben'
+                            message: 'Please insert your username'
                         },
                         maxLength: {
                             value: 20,
@@ -75,9 +88,10 @@ export default function LoginComponent() {
                         }
                     })}
                 />
-                <span>
-                    {errors?.userName?.message}
-                </span>
+
+                {
+                    errors.userName && <ErrorMessage >{errors.userName.message}</ErrorMessage>
+                }
 
                 <input
                     placeholder="Password"
@@ -87,7 +101,7 @@ export default function LoginComponent() {
                     ref={register({
                         required: {
                             value: true,
-                            message: 'Password bitte eingeben'
+                            message: 'Please insert your password'
                         },
                         maxLength: {
                             value: 20,
@@ -99,15 +113,25 @@ export default function LoginComponent() {
                         }
                     })}
                 />
-                <span>
-                    {errors?.userPassword?.message}
-                </span>
 
-                <span>
-                    {errors?.email?.message}
-                </span>
+                {
+                    errors.userPassword && <ErrorMessage >{errors.userPassword.message}</ErrorMessage>
+                }
+
 
                 <button type="submit">login</button>
+
+                {
+                    conflictError &&
+                    <>
+                        <ErrorMessage >{conflictError}</ErrorMessage>
+                        <br/>
+                        <p> please try again or <Link to="/user/singup">SingUp</Link></p>
+                    </>
+
+                }
+
+                <NavLink to="/user/singup" className="btn btn-dark" activeClassName="active">SingUp</NavLink>
             </Form>
         </>
     )
@@ -128,3 +152,14 @@ const Form = styled.form`
     font-family: 'Al Nile';
   }
 `
+
+const ErrorMessage = styled.span`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: crimson;
+  //background: darkgrey;
+  border: none;
+  border-radius: 3px;
+  font-size: medium;
+`
+;

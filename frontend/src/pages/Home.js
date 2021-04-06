@@ -16,7 +16,7 @@ const myStyles = makeStyles(theme => ({
         padding: theme.spacing(3)
     },
 }))
-export default function Home ({messages}){
+export default function Home ({messages, loggedUser, token}){
 
     const classes = myStyles()
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -27,17 +27,17 @@ export default function Home ({messages}){
     }
 
     useEffect(() => {
-        // logic, filter, ...
         //const gesundheitList = messages.filter((message) => message.category=== 'Gesundheit')
         const randomOne = messages[Math.floor(Math.random()*messages.length)];
         setRandomItem(randomOne)
-    }, [messages])
+    }, [messages, loggedUser, token])
 
 
 
     return (
         <AppContainer>
-            <NavbarComponent handleDrawerToggle={handleDrawerToggle}/>
+            <NavbarComponent handleDrawerToggle={handleDrawerToggle}
+                             loggedUser={loggedUser} />
             <Hidden lgDown>
                 <MyDrawer
                     variant='permanent'
@@ -52,12 +52,12 @@ export default function Home ({messages}){
                 />
             </Hidden>
 
-            <div>
+            <Test>
                 <div className={classes.toolbar}></div>
                 <Content className={classes.content}>
-                    <MUI_Card messages={messages} randomItem={randomItem}/>
+                    <MUI_Card messages={messages} randomItem={randomItem} loggedUser={loggedUser}/>
                 </Content>
-            </div>
+            </Test>
         </AppContainer>
     )
 }
@@ -76,4 +76,9 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+
+const Test = styled.div`
+  display: flex;
+  overflow-y: scroll;
 `

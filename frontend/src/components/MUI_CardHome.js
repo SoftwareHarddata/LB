@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -16,8 +16,6 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import InfoIcon from '@material-ui/icons/Info';
 import SimpleModal from "./SimpleModal";
 import LikeButtonWithSnackbar from "./Buttons/LikeButtonWithSnackbar";
-import {postAction} from "../services/actionsService";
-import {getLoggedUser} from "../services/userService";
 
 const useStyles = makeStyles({
     root: {
@@ -32,27 +30,13 @@ const useStyles = makeStyles({
     },
 });
 
-export default function MUI_Card({randomItem, loggedUser}) {
+export default function MUI_CardHome({randomItem}) {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
 
-    useEffect(() => {
-            console.log("..........")
-            console.log(loggedUser)
-    },  [loggedUser])
-
     const handleClick = () => {
         setOpen(true);
-    };
-
-    const handleClickWatchlist = () => {
-        postAction(loggedUser?.idUserSingUp, randomItem?.id_message, "watchlist")
-    };
-
-    const handleClickMore = () => {
-        setOpen(true);
-        postAction(loggedUser?.idUserSingUp, randomItem?.id_message, "clickedLike")
     };
 
     const handleClose = (event, reason) => {
@@ -75,15 +59,17 @@ export default function MUI_Card({randomItem, loggedUser}) {
                 <CardContent>
                     <ContentSection>
                         <h5>{randomItem?.subcategory}</h5>
+
                         <ContentText>{randomItem?.content}</ContentText>
+
                          Call to action!!
                     </ContentSection>
                 </CardContent>
             </CardActionArea>
             <CardButtons>
-                <LikeButtonWithSnackbar onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
+                <LikeButtonWithSnackbar onClick={handleClick} onClose={handleClose} isOpen={open}/>
                 {/*<MYButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
-                <MYButton onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon/>}/>
+                <MYButton name='save' iconName={<FavoriteIcon/>}/>
                 <MYButton name='Experten' iconName={<ContactPhoneIcon/>}/>
                 <SimpleModal randomItem={randomItem}/>
             </CardButtons>
@@ -120,8 +106,8 @@ const Titel = styled.div`
 const CardButtons = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin: 5px;
+  justify-content: space-around;
   gap: 5px;
 `
 
@@ -140,7 +126,7 @@ const ContentText = styled.p`
   flex-wrap: wrap;
   flex-direction: column;
   word-break: break-word;
-  //background: crimson;
+  background: crimson;
 
   flex-grow: 1;
   overflow: auto;

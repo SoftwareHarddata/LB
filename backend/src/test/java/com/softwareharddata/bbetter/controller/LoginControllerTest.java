@@ -7,6 +7,8 @@ import com.softwareharddata.bbetter.model.LoginDto;
 import com.softwareharddata.bbetter.model.UserSingUp;
 import com.softwareharddata.bbetter.model.UserSingUpDto;
 import com.softwareharddata.bbetter.utils.EncryptPassword;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,14 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(properties = "security.jwt.secret=supertestsecret")
 class LoginControllerTest {
 
     @LocalServerPort
@@ -68,8 +72,9 @@ class LoginControllerTest {
         ResponseEntity<String> response = restTemplate.postForEntity(getUrl(), new LoginDto(username, password), String.class);
 
         //THEN
+        Claims claims = Jwts.parser().setSigningKey("supertestsecret").parseClaimsJws(response.getBody()).getBody();
+        assertThat(claims.getSubject(), Matchers.is("admin"));
         assertThat(response.getStatusCode(), Matchers.is(HttpStatus.OK));
-        assertThat(response.getBody(), Matchers.is("jwt token"));
 
     }
 

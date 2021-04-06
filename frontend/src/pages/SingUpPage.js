@@ -6,8 +6,7 @@ function SingUpPage() {
   return (
     <PageLayout>
       <Header>
-        <p>halli</p>
-          <p>hallo</p>
+        <p>2 be better</p>
       </Header>
         <section>
             <SingUp/>

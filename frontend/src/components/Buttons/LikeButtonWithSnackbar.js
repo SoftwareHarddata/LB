@@ -12,7 +12,7 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '50%',
+        //width: '50%',
         '& > * + *': {
             marginTop: theme.spacing(2),
         },
@@ -35,15 +35,15 @@ export default function LikeButtonWithSnackbar({onClick, onClose, isOpen}) {
      };*/
 
     return (
-        <div>
-            <MYButton name='mehr davon' iconName={<ThumbUpIcon/>} onClick={onClick}/>
-            <div className={classes.root}>
-            <Snackbar open={isOpen} autoHideDuration={1200} onClose={onClose}>
+        <>
+            <MYButton name='mehr davon' iconName={<ThumbUpIcon/>} onClick={onClick} id="mybutton"/>
+            <div className={classes.root} id="test">
+            <Snackbar className="mySnack" open={isOpen} autoHideDuration={1200} onClose={onClose}>
                 <Alert onClose={onClose} severity="success">
                     Done!
                 </Alert>
             </Snackbar>
             </div>
-        </div>
+        </>
     );
 }

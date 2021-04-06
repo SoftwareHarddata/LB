@@ -1,6 +1,7 @@
 package com.softwareharddata.bbetter.controller;
 
 import com.softwareharddata.bbetter.model.LoginDto;
+import com.softwareharddata.bbetter.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,16 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("auth")
 public class LoginController {
 
 
     private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
+
+
 
     @Autowired
-    public LoginController(AuthenticationManager authenticationManager) {
+    public LoginController(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
     }
 
     @PostMapping("login")
@@ -30,7 +38,11 @@ public class LoginController {
             } catch (Exception e) {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "invalid credentials");
             }
-            return "jwt token";
+        return jwtUtils.createToken(loginDto.getUsername(), new HashMap<>(Map.of(
+                "message1","i am in token"
+
+        )));
         }
+
 
     }

@@ -85,7 +85,7 @@ public class UserService {
 
     // todo: tests
     public UserSingUp getUserByUsername(String username) {
-        return userDb.findByUsername(username)
+        return userDb.findFirstByUsername(username) // todo: findByUsernamw
                 //.orElseThrow(() -> new EntityNotFoundException(String.format("User not found with id: %s", username)));
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "nicht autorisiert, bitte registrieren Sie sich"));
     }
@@ -97,7 +97,7 @@ public class UserService {
         UserDetails userDetails = UserDetails.builder()
                 .isPremium(false)
                 .idUser(id)
-                .idUserSingUp("97780f6a-448c-4ddc-af73-1843d7909e38")
+                .idUserSingUp(userDetailsDto.getIdUserSingUp())
                 .age(userDetailsDto.getAge())
                 .sector(userDetailsDto.getSector())
                 .department(userDetailsDto.getDepartment())
