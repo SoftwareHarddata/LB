@@ -63,6 +63,8 @@ export default function Lists (){
                 <Divider/>
 
                 <div className={classes.nested}>
+
+                    <Link to="/user/category/gesundheit">
                     <ListItem button>
                         <ListItemIcon>
                             <InsertEmoticonIcon fontSize='small'/>
@@ -70,7 +72,9 @@ export default function Lists (){
                         <ListItemText
                             secondary='Gesundheit' />
                     </ListItem>
+                    </Link>
 
+                    <Link to="/user/category/social">
                     <ListItem button>
                         <ListItemIcon>
                             <GroupIcon fontSize='small'/>
@@ -78,6 +82,9 @@ export default function Lists (){
                         <ListItemText
                             secondary='Social' />
                     </ListItem>
+                    </Link>
+
+                    <Link to="/user/category/berufundprivate">
                     <ListItem button>
                         <ListItemIcon>
                             <LaptopMacIcon fontSize='small'/>
@@ -85,6 +92,9 @@ export default function Lists (){
                         <ListItemText
                             secondary='Berufs- & Privatleben' />
                     </ListItem>
+                    </Link>
+
+                    <Link to="/user/category/personlichkeit">
                     <ListItem button>
                         <ListItemIcon>
                             <EmojiPeopleIcon fontSize='small'/>
@@ -92,6 +102,9 @@ export default function Lists (){
                         <ListItemText
                             secondary='Persönlichkeit' />
                     </ListItem>
+                    </Link>
+
+                    <Link to="/user/category/sinn">
                     <ListItem button>
                         <ListItemIcon>
                             <EmojiObjectsIcon fontSize='small'/>
@@ -99,6 +112,7 @@ export default function Lists (){
                         <ListItemText
                             secondary='Sinn' />
                     </ListItem>
+                    </Link>
 
                     <Divider/>
                     <ListItem button>

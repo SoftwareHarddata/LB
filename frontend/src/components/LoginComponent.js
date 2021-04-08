@@ -4,6 +4,7 @@ import {loginUser, singUpUser} from '../services/loginService'
 import {useForm} from "react-hook-form";
 import {Link, NavLink, Redirect} from 'react-router-dom';
 import {getLoggedUser, loggedUser} from "../services/userService";
+import CircularIndeterminate from "./CircularIndeterminate";
 
 
 export default function LoginComponent({setToken, token}) {
@@ -15,11 +16,13 @@ export default function LoginComponent({setToken, token}) {
     //const initialFormState = { userName:'', userPassword: '' }
     const [singUpData, setSingUpData] = useState([])
     const [conflictError, setConflictError] = useState('')
+    const [isOnsubmit, setIsOnsubmit] = useState(false)
 
 
 
 
     const onSubmit = (data, e) =>{
+        setIsOnsubmit(false)
         console.log(data);
         console.log(data.userName)
         setSingUpData([
@@ -34,6 +37,17 @@ export default function LoginComponent({setToken, token}) {
 
         // clean fields
         e.target.reset();
+        setIsOnsubmit(true)
+
+    }
+
+
+    if (!token && isOnsubmit) {
+        console.log("waiting")
+        return <WaitingStyle> <CircularIndeterminate/> <p color='#000000'>Loading!!!</p> <CircularIndeterminate/> </WaitingStyle>
+        /*<section>
+            <p>Waiting!!!</p>
+        </section>*/
     }
 
     if (token) {
@@ -161,5 +175,9 @@ const ErrorMessage = styled.span`
   border: none;
   border-radius: 3px;
   font-size: medium;
+`
+
+const WaitingStyle = styled.section`
+  background: white;
 `
 ;

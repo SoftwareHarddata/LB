@@ -12,6 +12,8 @@ import * as messageApi from './services/messageService'
 import MessageDetails from "./components/MessageDetails";
 import Login from "./pages/Login";
 import * as userApi from "./services/userService";
+import ByCategory from "./pages/ByCategory";
+import Actions from "./pages/Actions";
 
 
 
@@ -50,22 +52,27 @@ function App() {
             <Route exact path="/user/login">
                 <Login setToken={setToken} token={token} />
             </Route>
+
             <Route exact path="/:username">
-                <Welcome setLoggedUser={setLoggedUser} loggedUser={loggedUser} token={token}/>
+                <Welcome setLoggedUser={setLoggedUser} setToken={setToken} loggedUser={loggedUser} token={token}/>
             </Route>
             <Route exact path="/user/details">
-                <Userdetails token={token} loggedUser={loggedUser}/>
+                <Userdetails token={token} loggedUser={loggedUser} setToken={setToken}/>
             </Route>
 
             <Route exact path="/user/home">
-                <Home messages={messages} token={token} loggedUser={loggedUser}/>
+                <Home messages={messages} token={token} loggedUser={loggedUser} setToken={setToken}/>
             </Route>
             <Route exact path="/user/messages">
-                <MessageDetails messages={messages} token={token} loggedUser={loggedUser}/>
+                <MessageDetails messages={messages} token={token} loggedUser={loggedUser} setToken={setToken}/>
             </Route>
-            {/*todo: category, favoriten, experten, suchfunktion, details*/}
-            <Route exact path="category/:category">
-                <Home messages={messages} token={token} loggedUser={loggedUser}/>
+            {/*todo: category, experten, suchfunktion, userdetails*/}
+            <Route exact path="/user/category/:category">
+                <ByCategory messages={messages} token={token} loggedUser={loggedUser} setToken={setToken}/>
+            </Route>
+            {/*todo: beim favoriten username gegen idUserSingUp tauschen */}
+            <Route exact path="/user/favoriten/:idUserSingUp/:action">
+                <Actions messages={messages} token={token} loggedUser={loggedUser} setToken={setToken}/>
             </Route>
         </Switch>
     </Router>

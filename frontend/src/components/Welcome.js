@@ -23,7 +23,7 @@ const myStyles = makeStyles(theme => ({
 
 }))
 
-export default function Welcome ({token, setLoggedUser, loggedUser}){
+export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
 
     const { username } = useParams();
 
@@ -55,7 +55,7 @@ export default function Welcome ({token, setLoggedUser, loggedUser}){
     return (
         <>
         <div className={classes.root}>
-            <NavbarComponent handleDrawerToggle={handleDrawerToggle}
+            <NavbarComponent handleDrawerToggle={handleDrawerToggle} setToken={setToken}
                              loggedUserData={loggedUserData} loggedUser={loggedUser}
                              />
             <div className={classes.content}>

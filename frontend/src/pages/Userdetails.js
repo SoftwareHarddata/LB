@@ -9,6 +9,7 @@ import {getLoggedUser} from "../services/userService";
 import {Link, NavLink, Redirect} from "react-router-dom";
 import {Hidden} from "@material-ui/core";
 import MyDrawer from "./MyDrawer";
+import ButtonAppBar from "../components/ButtonAppBar";
 
 const ages = [
     {
@@ -108,17 +109,20 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: '25ch',
         },
-        //display: 'flex'
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: 'scroll',
+        flexGrow:'1',
     },
     toolbar : theme.mixins.toolbar,
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.palette.background.default,
     },
 }));
 
-export default function Userdetails({loggedUser}) {
+export default function Userdetails({loggedUser, token, setToken}) {
     const [requestDetailsError, setRequestDetails ] = useState('')
 
     const [age, setAge] = React.useState('');
@@ -185,7 +189,7 @@ export default function Userdetails({loggedUser}) {
     return (
         <div className={classes.root}>
             <NavbarComponent handleDrawerToggle={handleDrawerToggle}
-                             loggedUser={loggedUser}/>
+                             loggedUser={loggedUser} setToken={setToken}/>
             <div className={classes.toolbar}></div>
             <Hidden lgDown>
                 <MyDrawer
@@ -318,14 +322,12 @@ export default function Userdetails({loggedUser}) {
 
             </div>
 
-            <button className="btn btn-primary btn-block" type="submit">Add</button>
+            <AddButton type="submit">Add</AddButton>
+
+
         </form>
-            <ButtonsNavigation>
-                <button> <Link to="/user/home">Home</Link> </button>
+            <ButtonAppBar loggedUser={loggedUser}/>
 
-                <button> <NavLink to={`/${loggedUser.username}`} activeClassName="active"> welcome </NavLink> </button>
-
-            </ButtonsNavigation>
         </div>
     );
 }
@@ -346,4 +348,23 @@ const ButtonsNavigation = styled.div`
   border: none;
   display: flex;
   justify-content: space-around;
+`;
+
+const AddButton = styled.button`
+  background: #1161ee;
+  border-radius: 10px;
+  border: 0;
+
+  display: flex;
+  margin-bottom: 10px;
+  text-align: center;
+
+  color: white;
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)';
+  height: 30px;
+  width: 100px;
+  padding: 5px;
+  justify-content: center;
+  align-content: center;
+  
 `;

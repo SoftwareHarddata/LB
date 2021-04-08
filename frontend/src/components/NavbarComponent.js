@@ -3,7 +3,9 @@ import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core
 import {makeStyles} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AppleIcon from '@material-ui/icons/Apple';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {NavLink} from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const drawerWidth =240;
 const useStyles = makeStyles(theme => ({
@@ -41,9 +43,21 @@ export default function NavbarComponent (props){
                     <Typography variant='subtitle1' className={classes.title}>
                         Hallo {props.loggedUser?.username}
                     </Typography>
-                    <Button variant='text' color='inherit'>
-                        <NavLink to="/user/login" activeClassName="active"> logout </NavLink>
+
+                    <Tooltip title="logout">
+                    <Button variant='text' color='inherit' onClick={()=> props.setToken(undefined)}>
+                        <NavLink to="/user/login" activeClassName="active">
+                            logout
+                            <IconButton
+                                color='action'
+                                aria-label="logo"
+                                className={classes.menuButton}>
+                                <ExitToAppIcon />
+                            </IconButton>
+                        </NavLink>
                     </Button>
+                    </Tooltip>
+
                     <IconButton
                         onClick={()=> props.handleDrawerToggle()}
                         color='inherit'

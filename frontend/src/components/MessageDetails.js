@@ -9,7 +9,8 @@ import styled from "styled-components/macro";
 
 const responsive = [
     { breakPoint: 1280, cardsToShow: 2 }, // this will be applied if screen size is greater than 1280px. cardsToShow will become 4.
-    { breakPoint: 760, cardsToShow: 1 },
+    { breakPoint: 660, cardsToShow: 2 },
+    { breakPoint: 0, cardsToShow: 1 },
 ];
 
 const myStyles = makeStyles(theme => ({
@@ -22,7 +23,7 @@ const myStyles = makeStyles(theme => ({
         padding: theme.spacing(3)
     },
 }))
-export default function MessageDetails ({messages, loggedUser, token}){
+export default function MessageDetails ({messages, loggedUser, token, setToken}){
 
     const classes = myStyles()
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -34,7 +35,7 @@ export default function MessageDetails ({messages, loggedUser, token}){
     return (
         <>
             <NavbarComponent handleDrawerToggle={handleDrawerToggle}
-                             loggedUser={loggedUser} />
+                             loggedUser={loggedUser} setToken={setToken} />
             <Hidden lgDown>
                 <MyDrawer
                     variant='permanent'

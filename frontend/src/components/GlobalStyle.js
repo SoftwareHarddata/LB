@@ -3,10 +3,11 @@ import {createGlobalStyle} from "styled-components";
 export default createGlobalStyle`
     #root{
       position: fixed;
-      top: 0;
+      top: 0px;
       left: 0;
       width: 100%;
       height: 100%;
+      
     }
 
     * {

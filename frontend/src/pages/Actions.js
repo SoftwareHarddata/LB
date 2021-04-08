@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import NavbarComponent from "../components/NavbarComponent";
 import MyDrawer from "./MyDrawer";
 import MUI_Card from "../components/MUI_Card";
+import {useParams} from "react-router-dom";
 
 
 const myStyles = makeStyles(theme => ({
@@ -16,25 +17,59 @@ const myStyles = makeStyles(theme => ({
         padding: theme.spacing(3)
     },
 }))
-export default function Home ({messages, loggedUser, token, setToken}){
+export default function Actions ({messages, loggedUser, token, setToken}){
 
     const classes = myStyles()
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [randomItem, setRandomItem] = React.useState([]);
+    const [categoryVar, setCategoryVar] = React.useState('');
+    const [filteredList, setFilteredList] = React.useState([]);
+
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
     }
 
+    let { category } = useParams();
+    const urlParam = "berufundprivate";
+
+    const checkCategory = (urlParam) => {
+        if(urlParam==='gesundheit'){
+            return setCategoryVar("Gesundheit")
+        }
+        else if(urlParam==='personlichkeit'){
+            return setCategoryVar("Personlichkeit")
+        }
+        else if(urlParam==='berufundprivate'){
+            return setCategoryVar("Berufs- und Privatleben")
+        }
+        else if(urlParam==='social'){
+            return setCategoryVar("Social")
+        }
+        else if(urlParam==='sinn'){
+            return setCategoryVar("Sinn")
+        }
+
+
+    }
+
+
     useEffect(() => {
-        //const gesundheitList = messages.filter((message) => message.category=== 'Gesundheit')
-        const randomOne = messages[Math.floor(Math.random()*messages.length)];
-        setRandomItem(randomOne)
-    }, [messages, loggedUser, token])
+        // ... ...
+        console.log('urlParam '+urlParam)
+        checkCategory(category)
+        console.log('categoryVar '+categoryVar)
+        console.log('category '+category)
+
+
+        const filteredList = messages?.filter((message) => message?.category === categoryVar)
+        setFilteredList(filteredList)
+
+    }, [messages, loggedUser, token, category])
 
 
 
     return (
+
         <AppContainer>
             <NavbarComponent handleDrawerToggle={handleDrawerToggle}
                              loggedUser={loggedUser} setToken={setToken} />
@@ -55,10 +90,15 @@ export default function Home ({messages, loggedUser, token, setToken}){
             <Test>
                 <div className={classes.toolbar}></div>
                 <Content className={classes.content}>
-                    <MUI_Card messages={messages} randomItem={randomItem} loggedUser={loggedUser}/>
+
+                    {filteredList?.map((itemMessage) => (
+
+                    <MUI_Card randomItem={itemMessage} loggedUser={loggedUser}/>
+                    ))}
                 </Content>
             </Test>
         </AppContainer>
+
     )
 }
 
@@ -76,9 +116,13 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 `
 
 const Test = styled.div`
-  display: flex;
-  overflow-y: scroll;
+  //overflow-y: scroll;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 5px
 `

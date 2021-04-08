@@ -21,10 +21,12 @@ import {getLoggedUser} from "../services/userService";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: '100%',
+        maxWidth: '300px',
+        height: '450px',
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'nowrap',
+        overflowY: 'scroll',
 
         flexGrow: 1,
         /* for Firefox */
@@ -65,56 +67,59 @@ export default function MUI_Card({randomItem, loggedUser}) {
 
     return (
         <Card className={classes.root}>
-            <div>
-            <CardActionArea>
-                <CardHeader>
-                    <Titel><h4>{randomItem?.titel}</h4></Titel>
-                    <Category>{randomItem?.category}</Category>
-                </CardHeader>
 
-                <CardContent>
-                    <ContentSection>
-                        <h5>{randomItem?.subcategory}</h5>
-                        <ContentText>{randomItem?.content}</ContentText>
-                         Call to action!!
-                    </ContentSection>
-                </CardContent>
-            </CardActionArea>
-            <CardButtons>
-                <LikeButtonWithSnackbar onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
-                {/*<MYButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
-                <MYButton onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon/>}/>
-                <MYButton name='Experten' iconName={<ContactPhoneIcon/>}/>
-                <SimpleModal randomItem={randomItem}/>
-            </CardButtons>
-        </div>
-</Card>
+                <CardActionArea>
+                    <CardHeader>
+                        <Titel><h4>{randomItem?.titel}</h4></Titel>
+                        <Category>{randomItem?.category}</Category>
+                    </CardHeader>
+                </CardActionArea>
+
+            <Wrapper>
+                <ContentSection>
+                    <h5>{randomItem?.subcategory}</h5>
+                    <ContentText>{randomItem?.content}</ContentText>
+                    Call to action!!
+                </ContentSection>
+
+                <CardButtons>
+                    <LikeButtonWithSnackbar onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
+                    {/*<MYButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
+                    <MYButton onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon/>}/>
+                    <MYButton name='Experten' iconName={<ContactPhoneIcon/>}/>
+                    <SimpleModal randomItem={randomItem}/>
+                </CardButtons>
+            </Wrapper>
+        </Card>
     );
 }
 
 const CardHeader = styled.div`
   display: flex;
+  flex-direction: column;
+  
   align-items: center;
   background: #e3c9a8;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
+  Flex: 1 1 auto;
 `
 const Category = styled.div`
   display: flex;
   border-radius: 6px;
   border: 2px solid #fff;
   padding: 4px;
-  margin: 12px;
+  margin: 0 12px 12px 12px;
   text-align: center;
   flex-wrap: wrap;
 `
 //frage: @media
 const Titel = styled.div`
   display: flex;
-  margin: 12px 0 0 12px;
-  @media all and (min-width: 359px){
+  margin: 12px 0 0 0px;
+ /* @media all and (min-width: 359px){
     .h4{font-size: small;}
-  }
+  }*/
 `
 
 const CardButtons = styled.div`
@@ -130,9 +135,13 @@ const ContentSection = styled.section`
   flex-wrap: wrap;
   flex-direction: column;
   word-break: break-word;
-  flex-grow: 1;
   /* for Firefox */
   min-height: 0;
+  padding: 16px;
+  height: auto;
+  flex-grow: 1;
+  font-weight: 500;
+
 `
 
 const ContentText = styled.p`
@@ -143,7 +152,15 @@ const ContentText = styled.p`
   //background: crimson;
 
   flex-grow: 1;
-  overflow: auto;
+  //overflow: auto;
   /* for Firefox */
   min-height: 0;
+`
+
+const Wrapper = styled.div`
+  //display: grid;
+  //grid-template-columns: auto 1fr;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 `
