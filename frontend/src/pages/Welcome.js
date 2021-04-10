@@ -1,24 +1,32 @@
 import React, {useEffect, useState} from "react";
 import {Hidden, makeStyles, Typography} from "@material-ui/core";
-import MyDrawer from "../pages/MyDrawer";
-import NavbarComponent from "./NavbarComponent";
-import HiddenComponent from "./HiddenComponent";
+import MyDrawer from "./MyDrawer";
+import NavbarComponent from "../components/NavbarComponent";
+import HiddenComponent from "../components/HiddenComponent";
 import {Link, NavLink, useParams} from "react-router-dom";
 import styled from "styled-components/macro";
 import * as userApi from "../services/userService";
 import {getLoggedUser} from "../services/userService";
 
-const drawerWidth =240;
-
 const myStyles = makeStyles(theme => ({
     root: {
-        display: 'flex'
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
     },
     toolbar : theme.mixins.toolbar,
     content: {
+        display: 'flex',
+        //flexWrap: 'wrap',
         flexGrow: 1,
-        padding: theme.spacing(3),
-        backgroundColor: theme.palette.background.paper,
+        paddingTop: theme.spacing(11),
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
+
+        //background: 'linear-gradient(to bottom, #99b7d8, #99b7d8, #aac4e2, #bad2ed, #cbe0f8)', // F1F1F1
+        backgroundColor: '#A8AAB5',
+        color: "#1D253B"
     },
 
 }))
@@ -86,13 +94,8 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
                 />
             </Hidden>
 
-        </div>
-
-
             <ButtonsNavigation>
-                <button> <Link to="/user/home">Home</Link> </button>
-
-                <button> <NavLink to="/user/details" activeClassName="active"> profil </NavLink> </button>
+                <AButton> <NavLink to="/user/details" activeClassName="active"> profil </NavLink> </AButton>
 
                 {/*
             <form method="post" action="/logout">
@@ -100,10 +103,8 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
             </form>
             //or a button from type submit
             */}
-        </ButtonsNavigation>
-
-
-
+            </ButtonsNavigation>
+        </div>
 
         </>
     )
@@ -111,8 +112,23 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
 
 const ButtonsNavigation = styled.div`
   padding: 0.5em;
-  background: seashell;
+  background: #A8AAB5;
   border: none;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 60px;
+`;
+
+const AButton = styled.button`
+  background: #1D253B;
+  border-radius: 10px;
+  border: 0;
+  margin: 10px;
+  text-align: center;
+
+  color: white;
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)';
+  
+  padding: 5px;
+
 `;

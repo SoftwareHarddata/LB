@@ -1,6 +1,6 @@
 package com.softwareharddata.bbetter.service;
 
-import com.softwareharddata.bbetter.db.UserAllInfosDb;
+import com.softwareharddata.bbetter.db.UserAllInfosViewDb;
 import com.softwareharddata.bbetter.db.UserDetailsMysqlDb;
 import com.softwareharddata.bbetter.db.UserMysqlDb;
 import com.softwareharddata.bbetter.exception.EntityAlreadyExistsException;
@@ -21,7 +21,7 @@ import org.springframework.http.HttpStatus;
 public class UserService {
     private final UserMysqlDb userDb;
     private final UserDetailsMysqlDb userDetailsMysqlDb;
-    private final UserAllInfosDb allInfosDb;
+    private final UserAllInfosViewDb allInfosDb;
 
 
     private static final String ALREADY_EXISTS_MESSAGE = "Customer with email: %s is already existing";
@@ -29,7 +29,7 @@ public class UserService {
 
 
     @Autowired
-    public UserService(UserMysqlDb userDb, UserDetailsMysqlDb userDetailsMysqlDb, UserAllInfosDb allInfosDb) {
+    public UserService(UserMysqlDb userDb, UserDetailsMysqlDb userDetailsMysqlDb, UserAllInfosViewDb allInfosDb) {
         this.userDb = userDb;
         this.userDetailsMysqlDb = userDetailsMysqlDb;
         this.allInfosDb = allInfosDb;

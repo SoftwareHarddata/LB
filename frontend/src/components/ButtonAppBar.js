@@ -9,16 +9,36 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import {Link, NavLink} from "react-router-dom";
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import {Hidden} from "@material-ui/core";
+import SearchIcon from '@material-ui/icons/Search';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        marginTop: theme.spacing(9),
+        display:'flex',
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        //marginRight: theme.spacing(2),
     },
     title: {
         flexGrow: 1,
+    },
+
+    myBotton: {
+        padding: 0,
+    },
+
+    appBar: {
+        background: '#365A80',
+        top: 'auto',
+        bottom: 0,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: "center",
     },
 }));
 
@@ -27,36 +47,51 @@ export default function ButtonAppBar({loggedUser}) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
 
-                    {/*<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    {/*
+                    <AppBar position="static" top: 'auto',>
+
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>*/}
 
 
-                    <Button color="inherit"> <NavLink to={`/${loggedUser.username}`} activeClassName="active">
-                        welcome
+                    <Button className={classes.myBotton} color="inherit"> <NavLink to={`/${loggedUser?.username}`} activeClassName="active">
+                          <Hidden xsDown>Welcome</Hidden>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                             <ImportContactsIcon />
                         </IconButton>
                     </NavLink> </Button>
 
-                    <Button color="inherit"> <Link to="/user/home">
-                        Home
+                    <Button className={classes.myBotton} color="inherit"> <Link to="/user/home">
+                         <Hidden xsDown>Home</Hidden>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                             <HomeIcon />
                         </IconButton>
                     </Link> </Button>
 
-                    <Button color="inherit"> <Link to="/user/home">
-                        Favoriten
+                    <Button className={classes.myBotton} color="inherit"> <Link to={`/user/favoriten/${loggedUser?.idUserSingUp}/watchlist`}>
+                        <Hidden xsDown>Favoriten</Hidden>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                            <HomeIcon />
+                            <FavoriteIcon />
                         </IconButton>
                     </Link> </Button>
 
+                    <Button className={classes.myBotton} color="inherit"> <Link to="/user/suchen">
+                        <Hidden xsDown>Suchen</Hidden>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                            <SearchIcon />
+                        </IconButton>
+                    </Link> </Button>
 
+                    <Button className={classes.myBotton} color="inherit"> <Link to="/user/profil">
+                        <Hidden xsDown>Profil</Hidden>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                            <AccountCircleIcon />
+                        </IconButton>
+                    </Link> </Button>
                 </Toolbar>
             </AppBar>
         </div>

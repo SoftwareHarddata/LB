@@ -1,13 +1,14 @@
-import React from "react";
-import {List, ListItem, ListItemIcon,
-    ListItemText, Divider} from "@material-ui/core";
+import React, {useEffect} from "react";
+import {
+    List, ListItem, ListItemIcon,
+    ListItemText, Divider, Button, IconButton
+} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import SearchIcon from '@material-ui/icons/Search';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import GroupIcon from '@material-ui/icons/Group';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
@@ -15,7 +16,10 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import FilterIcon from '@material-ui/icons/Filter';
+import {getActionsFromUser} from "../services/actionsService";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,8 +27,14 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(4),
     },
 }));
-export default function Lists (){
+export default function Lists ({setToken, loggedUser}){
     const classes = useStyles();
+
+    console.log('vor useEffect loggedUser '+loggedUser)
+    useEffect(() => {
+        // ...
+        console.log('nach useEffect loggedUser '+loggedUser)
+    }, [loggedUser])
 
     return (
         <>
@@ -35,13 +45,17 @@ export default function Lists (){
                       </ListSubheader>
                   }
             >
-                <ListItem button>
+                {/*// todo: to do*/}
+                {/*<ListItem button>
                     <ListItemIcon>
                         <AccountCircleIcon fontSize='default'/>
                     </ListItemIcon>
                     <ListItemText
                         primary='Mein Profil' />
-                </ListItem>
+                </ListItem>*/}
+
+                {/*// todo: fix it. loggedUser undefined*/}
+                {/*<Link to={`/user/favoriten/${loggedUser?.idUserSingUp}/watchlist`}>
                 <ListItem button>
                     <ListItemIcon>
                         <FavoriteIcon fontSize='default'/>
@@ -49,11 +63,13 @@ export default function Lists (){
                     <ListItemText
                         primary='Favoriten' />
                 </ListItem>
+                </Link>*/}
+
 
                 <Link to="/user/messages">
                 <ListItem button>
                     <ListItemIcon>
-                        <SearchIcon fontSize='default'/>
+                        <FilterIcon fontSize='default'/>
                     </ListItemIcon>
                     <ListItemText
                         primary='Entdecken' />
@@ -115,20 +131,25 @@ export default function Lists (){
                     </Link>
 
                     <Divider/>
-                    <ListItem button>
+
+                    {/*// todo: to do*/}
+                    {/*<ListItem button>
                         <ListItemIcon>
                             <LibraryBooksIcon fontSize='default'/>
                         </ListItemIcon>
                         <ListItemText
                             primary='Datenschutz' />
-                    </ListItem>
-                    <ListItem button>
+                    </ListItem>*/}
+
+                    <NavLink to="/user/login" activeClassName="active">
+                    <ListItem button onClick={()=> setToken(undefined)}>
                         <ListItemIcon>
                             <ExitToAppIcon fontSize='default'/>
                         </ListItemIcon>
                         <ListItemText
                             primary='Logout' />
                     </ListItem>
+                        </NavLink>
                 </div>
 
 

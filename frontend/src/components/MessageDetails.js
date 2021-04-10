@@ -49,7 +49,7 @@ export default function MessageDetails ({messages, loggedUser, token, setToken})
                     onClose={handleDrawerToggle}
                 />
             </Hidden>
-            <div className="myCard">
+            <MySlider className="myCard">
                 <div className={classes.toolbar}></div>
                 <Slider responsive={responsive} autoSlide={false} showArrows={true}>
                             {messages?.map((watchListItem) => (
@@ -57,7 +57,7 @@ export default function MessageDetails ({messages, loggedUser, token, setToken})
                             ))}
                 </Slider>
 
-            </div>
+            </MySlider>
 
         </>
     )
@@ -78,4 +78,8 @@ const MyCard = styled.div`
   align-items: center;
   justify-content: center;
   background: #1161ee;
+`
+
+const MySlider = styled.div`
+  margin-top: 20px;
 `

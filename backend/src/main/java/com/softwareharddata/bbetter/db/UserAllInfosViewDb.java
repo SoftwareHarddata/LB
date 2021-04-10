@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserAllInfosDb extends CrudRepository<UserAllInfos,String> {
+public interface UserAllInfosViewDb extends CrudRepository<UserAllInfos,String> {
 
     List <UserAllInfos> findByIdUserSingUp (String id_user_singup);
     //List<UserAllInfos> getUserAllInfos (@Param("id_user_singup") String id_user_singup);

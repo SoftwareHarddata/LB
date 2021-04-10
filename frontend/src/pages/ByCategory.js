@@ -5,6 +5,7 @@ import NavbarComponent from "../components/NavbarComponent";
 import MyDrawer from "./MyDrawer";
 import MUI_Card from "../components/MUI_Card";
 import {useParams} from "react-router-dom";
+import Header from "../components/Header";
 
 
 const myStyles = makeStyles(theme => ({
@@ -20,14 +21,11 @@ const myStyles = makeStyles(theme => ({
 export default function ByCategory ({messages, loggedUser, token, setToken}){
 
     const classes = myStyles()
-    const [mobileOpen, setMobileOpen] = React.useState(false);
     const [categoryVar, setCategoryVar] = React.useState('');
     const [filteredList, setFilteredList] = React.useState([]);
 
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen)
-    }
+
 
     let { category } = useParams();
     //const urlParam = "berufundprivate";
@@ -48,9 +46,6 @@ export default function ByCategory ({messages, loggedUser, token, setToken}){
         else if(urlParam==='sinn'){
             return "Sinn"
         }
-
-
-
     }
 
 
@@ -67,9 +62,6 @@ export default function ByCategory ({messages, loggedUser, token, setToken}){
         console.log('categoryVar '+categoryVar)
         console.log('category '+category)
 
-
-
-
     }, [messages, loggedUser, token, category])
 
 
@@ -77,21 +69,7 @@ export default function ByCategory ({messages, loggedUser, token, setToken}){
     return (
 
         <AppContainer>
-            <NavbarComponent handleDrawerToggle={handleDrawerToggle}
-                             loggedUser={loggedUser} setToken={setToken} />
-            <Hidden lgDown>
-                <MyDrawer
-                    variant='permanent'
-                    open ={true}
-                />
-            </Hidden>
-            <Hidden xlUp>
-                <MyDrawer
-                    variant='temporary'
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                />
-            </Hidden>
+            <Header loggedUser={loggedUser} setToken={setToken} />
 
             {/*<Test>
                 <div className={classes.toolbar}></div>
@@ -107,49 +85,13 @@ export default function ByCategory ({messages, loggedUser, token, setToken}){
                 <Content >
                     {filteredList?.map((itemMessage) => (
                         <li>
-                        <MUI_Card randomItem={itemMessage} loggedUser={loggedUser}/>
+                          <MUI_Card randomItem={itemMessage} loggedUser={loggedUser}/>
                         </li>
                     ))}
                 </Content>
             </Test>
 
         </AppContainer>
-
-    /*
-    <List>
-        {users.map((user) => (
-            <li key={user.name}>
-                <Link to={`/user/${user.name}`}>
-                    <img src={user.avatar} alt={user.name} />
-                    <span className="user-name">{user.name}</span>
-                </Link>
-            </li>
-        ))}
-    </List>
-
-    const List = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-  li + li {
-    margin-top: 16px;
-  }
-  img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-  }
-  .user-name {
-    margin-left: 16px;
-  }
-`
-    */
-
     )
 }
 
@@ -159,9 +101,9 @@ const AppContainer = styled.div`
   display: flex;
   //align-items: center;
   //justify-content: center;
-  background: #d6cbbc;
+  background: #F1F1F1; // E5E7F4 A8AAB5
   overflow-y: scroll;
-  
+
 `
 
 const Content = styled.ul`
@@ -177,14 +119,16 @@ const Content = styled.ul`
   margin-bottom: 20px;
   gap: 10px;
 
-  li + li {
+  li {
     margin: 10px;
-  }
+  };
+/*li+li {
+  margin: 10px;
+}*/
 `
 
 const Test = styled.div`
   //padding: 0 16px;
   display: flex;
   padding-top: 40px;
- 
 `

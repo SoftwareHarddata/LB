@@ -35,7 +35,8 @@ export default function MyDrawer (props){
             >
                 <div className={classes.toolbar}></div>
                 <Divider/>
-                <Lists/>
+                <Lists setToken={props.setToken} loggedUser={props.loggedUser}
+                />
 
             </Drawer>
         </div>

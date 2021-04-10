@@ -35,11 +35,19 @@ public class WatchlistController {
         return new ResponseEntity<>(actionsList, HttpStatus.OK);
     }
 
-    @GetMapping("/{idUserSingup}/{action}")
-    //@ResponseBody
+    /*@GetMapping("/{idUserSingup}/{action}")
+    @ResponseBody
     public ResponseEntity<List<Actions>> getActionsFromUser(@PathVariable String idUserSingup,
                                                             @PathVariable String action){
         List<Actions> actionsList = actionsService.getActionsFromUser(idUserSingup, action);
+        return new ResponseEntity<>(actionsList, HttpStatus.OK);
+    }*/
+
+    @GetMapping("/{idUserSingup}/{action}")
+    @ResponseBody
+    public ResponseEntity<List<Actions_Message>> getActionsFromUser(@PathVariable String idUserSingup,
+                                                            @PathVariable String action){
+        List<Actions_Message> actionsList = actionsService.getActionsFromUser(idUserSingup, action);
         return new ResponseEntity<>(actionsList, HttpStatus.OK);
     }
 

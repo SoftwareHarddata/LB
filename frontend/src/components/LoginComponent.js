@@ -38,16 +38,6 @@ export default function LoginComponent({setToken, token}) {
         // clean fields
         e.target.reset();
         setIsOnsubmit(true)
-
-    }
-
-
-    if (!token && isOnsubmit) {
-        console.log("waiting")
-        return <WaitingStyle> <CircularIndeterminate/> <p color='#000000'>Loading!!!</p> <CircularIndeterminate/> </WaitingStyle>
-        /*<section>
-            <p>Waiting!!!</p>
-        </section>*/
     }
 
     if (token) {
@@ -57,24 +47,10 @@ export default function LoginComponent({setToken, token}) {
         return <Redirect to={`/${singUpData[0]["userName"]}`}/>
     }
 
-    // Ab hier
-
-
-    /*const handleSubmit = (event) => {
-        event.preventDefault()
-        if (!singUpData.userName && !singUpData.userPassword && !singUpData.email) {
-            return
-        }
-        singUpUser(singUpData.userName, singUpData.userPassword, singUpData.email).then()
-        setSingUpData(initialFormState)
-    }*/
-
-    /*const handleInputChange = (event) => {
-        console.log(event.target.value)
-        setSingUpData({
-            ...singUpData,
-            [event.target.name]: event.target.value
-        })
+    //todo: fix it
+    /*if (!token && isOnsubmit) {
+        console.log("waiting")
+        return <WaitingStyle> <CircularIndeterminate/> <p color='#000000'>Loading!!!</p> <CircularIndeterminate/> </WaitingStyle>
     }*/
 
     return (
@@ -178,6 +154,8 @@ const ErrorMessage = styled.span`
 `
 
 const WaitingStyle = styled.section`
+  width: 100%;
+  height: 100%;
   background: white;
 `
 ;

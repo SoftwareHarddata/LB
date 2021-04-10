@@ -10,6 +10,7 @@ import {Link, NavLink, Redirect} from "react-router-dom";
 import {Hidden} from "@material-ui/core";
 import MyDrawer from "./MyDrawer";
 import ButtonAppBar from "../components/ButtonAppBar";
+import Header from "../components/Header";
 
 const ages = [
     {
@@ -102,26 +103,6 @@ const company_sizes = [
 ];
 
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-        display: 'flex',
-        flexDirection: 'column',
-        overflowY: 'scroll',
-        flexGrow:'1',
-    },
-    toolbar : theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        backgroundColor: theme.palette.background.default,
-    },
-}));
-
 export default function Userdetails({loggedUser, token, setToken}) {
     const [requestDetailsError, setRequestDetails ] = useState('')
 
@@ -175,6 +156,10 @@ export default function Userdetails({loggedUser, token, setToken}) {
                 age: '', sector: '',
                 department: '', occupation: '', company_size: '', plz: 99999
             })
+
+            // todo: redirect
+            return <Redirect to={`/user/home`}/>
+
         }
 
     }
@@ -182,33 +167,14 @@ export default function Userdetails({loggedUser, token, setToken}) {
 //  todo: plz validieren (with react hooks form?), button ändern to Material UI, reset anpassen, unnötigen hooks löschen
 
     const classes = useStyles();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen) }
 
     return (
         <div className={classes.root}>
-            <NavbarComponent handleDrawerToggle={handleDrawerToggle}
-                             loggedUser={loggedUser} setToken={setToken}/>
-            <div className={classes.toolbar}></div>
-            <Hidden lgDown>
-                <MyDrawer
-                    variant='permanent'
-                    open ={true}
-                />
-            </Hidden>
+            <Header loggedUser={loggedUser} setToken={setToken} />
 
-            <Hidden xlUp>
-                <MyDrawer
-                    variant='temporary'
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                />
-            </Hidden>
-
-        <h2>UserDetails Form</h2>
-        <form onSubmit={ saveData } className={classes.root} autoComplete="off">
-            <div>
+            <Titel>Privates Nutzerprofil anlegen</Titel>
+            <form onSubmit={ saveData } className={classes.root} autoComplete="off">
+            <Wrapper>
                 <TextField
                     required
                     id="age"
@@ -320,7 +286,7 @@ export default function Userdetails({loggedUser, token, setToken}) {
                     requestDetailsError.plz && <> <br/> <ErrorMessage> plz {requestDetailsError.plz} </ErrorMessage> <br/> <br/> </>
                 }
 
-            </div>
+            </Wrapper>
 
             <AddButton type="submit">Add</AddButton>
 
@@ -342,21 +308,34 @@ const ErrorMessage = styled.span`
   font-size: x-small;
 `;
 
-const ButtonsNavigation = styled.div`
+/*const ButtonsNavigation = styled.div`
   padding: 0.5em;
   background: seashell;
   border: none;
   display: flex;
   justify-content: space-around;
+`;*/
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+const Titel = styled.h4`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const AddButton = styled.button`
-  background: #1161ee;
+  background: #1D253B;
   border-radius: 10px;
   border: 0;
 
   display: flex;
-  margin-bottom: 10px;
+  margin: 10px;
   text-align: center;
 
   color: white;
@@ -364,7 +343,32 @@ const AddButton = styled.button`
   height: 30px;
   width: 100px;
   padding: 5px;
+  align-self: center;
   justify-content: center;
-  align-content: center;
-  
 `;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: 'scroll',
+        flexGrow:'1',
+        backgroundColor: '#A8AAB5',
+        color: '#1D253B'
+    },
+    toolbar : theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        backgroundColor: '#D0CCC5',
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: 'scroll',
+    },
+}));

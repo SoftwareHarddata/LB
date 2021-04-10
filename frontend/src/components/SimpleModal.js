@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import InfoIcon from "@material-ui/icons/Info";
-import MYButton from "./Buttons/MyButton";
+import MyButton from "./Buttons/MyButton";
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 
 function rand() {
@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
         width: 330,
-        backgroundColor: "#d6cbbc",
+        backgroundColor: "#A8AAB5",
         border: '2px solid #000',
-        boxShadow: theme.shadows[5],
+        //boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
 }));
 
-export default function SimpleModal({randomItem}) {
+export default function SimpleModal({randomItem, headColor}) {
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -57,13 +57,13 @@ export default function SimpleModal({randomItem}) {
             <p>Pagination allows us to return just a subset of a whole result in a Page. This is useful, for example, when navigating through several pages of data on a web page.
 
                 Another advantage of pagination is that the amount of data sent from server to client is minimized. By sending smaller pieces of data, we can generally see an improvement in performance.</p>
-            <MYButton name='Experten (not working)' iconName={<ContactPhoneIcon/>}/>
+            <MyButton headColor={headColor} name='Experten (not working)' iconName={<ContactPhoneIcon/>}/>
         </div>
     );
 
     return (
         <div>
-            <MYButton name='infos' iconName={<InfoIcon/>} onClick={handleOpen}/>
+            <MyButton headColor={headColor} name='infos' iconName={<InfoIcon/>} onClick={handleOpen}/>
 
             <Modal
                 open={open}

@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import styled from "styled-components/macro";
 import Button_MUI from "./Buttons/Button_MUI";
 import createTypography from "@material-ui/core/styles/createTypography";
-import MYButton from "./Buttons/MyButton";
+import MyButton from "./Buttons/MyButton";
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';import FavoriteIcon from '@material-ui/icons/Favorite';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import InfoIcon from '@material-ui/icons/Info';
@@ -68,9 +68,9 @@ export default function MUI_CardHome({randomItem}) {
             </CardActionArea>
             <CardButtons>
                 <LikeButtonWithSnackbar onClick={handleClick} onClose={handleClose} isOpen={open}/>
-                {/*<MYButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
-                <MYButton name='save' iconName={<FavoriteIcon/>}/>
-                <MYButton name='Experten' iconName={<ContactPhoneIcon/>}/>
+                {/*<MyButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
+                <MyButton name='save' iconName={<FavoriteIcon/>}/>
+                <MyButton name='Experten' iconName={<ContactPhoneIcon/>}/>
                 <SimpleModal randomItem={randomItem}/>
             </CardButtons>
         </div>

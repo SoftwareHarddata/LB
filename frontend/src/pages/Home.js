@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import NavbarComponent from "../components/NavbarComponent";
 import MyDrawer from "./MyDrawer";
 import MUI_Card from "../components/MUI_Card";
+import Header from "../components/Header";
 
 
 const myStyles = makeStyles(theme => ({
@@ -19,12 +20,7 @@ const myStyles = makeStyles(theme => ({
 export default function Home ({messages, loggedUser, token, setToken}){
 
     const classes = myStyles()
-    const [mobileOpen, setMobileOpen] = React.useState(false);
     const [randomItem, setRandomItem] = React.useState([]);
-
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen)
-    }
 
     useEffect(() => {
         //const gesundheitList = messages.filter((message) => message.category=== 'Gesundheit')
@@ -36,21 +32,7 @@ export default function Home ({messages, loggedUser, token, setToken}){
 
     return (
         <AppContainer>
-            <NavbarComponent handleDrawerToggle={handleDrawerToggle}
-                             loggedUser={loggedUser} setToken={setToken} />
-            <Hidden lgDown>
-                <MyDrawer
-                    variant='permanent'
-                    open ={true}
-                />
-            </Hidden>
-            <Hidden xlUp>
-                <MyDrawer
-                    variant='temporary'
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                />
-            </Hidden>
+            <Header loggedUser={loggedUser} setToken={setToken} />
 
             <Test>
                 <div className={classes.toolbar}></div>
@@ -68,7 +50,8 @@ const AppContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #d6cbbc;
+  //background: #A8AAB5;
+  background: #F1F1F1;
   
 `
 
@@ -81,4 +64,5 @@ const Content = styled.div`
 const Test = styled.div`
   display: flex;
   overflow-y: scroll;
+  justify-content: center;
 `

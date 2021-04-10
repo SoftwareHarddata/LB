@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import styled from "styled-components/macro";
 import Button_MUI from "./Buttons/Button_MUI";
 import createTypography from "@material-ui/core/styles/createTypography";
-import MYButton from "./Buttons/MyButton";
+import MyButton from "./Buttons/MyButton";
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';import FavoriteIcon from '@material-ui/icons/Favorite';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import InfoIcon from '@material-ui/icons/Info';
@@ -18,10 +18,15 @@ import SimpleModal from "./SimpleModal";
 import LikeButtonWithSnackbar from "./Buttons/LikeButtonWithSnackbar";
 import {postAction} from "../services/actionsService";
 import {getLoggedUser} from "../services/userService";
+import {useParams} from "react-router-dom";
+import CircularIndeterminate from "./CircularIndeterminate";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: '300px',
+        // todo: mediaQuery
+        width: '350px',
+        maxWidth: '350px',
+        minWidth: '350px',
         height: '450px',
         display: 'flex',
         flexDirection: 'column',
@@ -31,22 +36,62 @@ const useStyles = makeStyles({
         flexGrow: 1,
         /* for Firefox */
         minHeight: 0,
+
     },
 });
 
 export default function MUI_Card({randomItem, loggedUser}) {
-    const classes = useStyles();
 
+    const [headColor, setHeadColor] = React.useState('');
+
+    const checkRandomItemForColor= (randomItem) => {
+        if(randomItem.category==='Gesundheit'){
+            return "#89A9CD"
+        }
+        else if(randomItem.category==='Personlichkeit'){
+            return "#89A9CD"
+        }
+        else if(randomItem.category==='Berufs- und Privatleben'){
+            return "#89A9CD"
+        }
+        else if(randomItem.category==='Social'){
+            return '#89A9CD'
+            //'linear-gradient(to right, #00c6ff, #0072ff)'
+                //'#0a18ab'
+        }
+        else if(randomItem==='Sinn'){
+            return "#89A9CD"
+        }
+    }
+
+    const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
             console.log("..........")
             console.log(loggedUser)
-    },  [loggedUser])
 
-    const handleClick = () => {
+        const checkedColor = checkRandomItemForColor(randomItem)
+        if (checkRandomItemForColor){
+            setHeadColor(checkedColor)
+        }
+        console.log("..........")
+        console.log(checkedColor)
+        console.log('headc '+headColor)
+
+        if (!headColor) {
+            console.log("waiting")
+            return <WaitingStyle> <CircularIndeterminate/> <p color='#000000'>Loading!!!</p> <CircularIndeterminate/> </WaitingStyle>
+            /*<section>
+                <p>Waiting!!!</p>
+            </section>*/
+        }
+
+    },  [loggedUser, randomItem, headColor])
+
+   /* const handleClick = () => {
         setOpen(true);
-    };
+    };*/
 
     const handleClickWatchlist = () => {
         postAction(loggedUser?.idUserSingUp, randomItem?.id_message, "watchlist")
@@ -69,7 +114,12 @@ export default function MUI_Card({randomItem, loggedUser}) {
         <Card className={classes.root}>
 
                 <CardActionArea>
-                    <CardHeader>
+                    <CardHeader
+                        style={{
+
+                            background: headColor,
+                        }}
+                    >
                         <Titel><h4>{randomItem?.titel}</h4></Titel>
                         <Category>{randomItem?.category}</Category>
                     </CardHeader>
@@ -83,11 +133,11 @@ export default function MUI_Card({randomItem, loggedUser}) {
                 </ContentSection>
 
                 <CardButtons>
-                    <LikeButtonWithSnackbar onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
-                    {/*<MYButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
-                    <MYButton onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon/>}/>
-                    <MYButton name='Experten' iconName={<ContactPhoneIcon/>}/>
-                    <SimpleModal randomItem={randomItem}/>
+                    <LikeButtonWithSnackbar headColor='#89A9CD' onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
+                    {/*<MyButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
+                    <MyButton headColor='#89A9CD' onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon/>}/>
+                    <MyButton headColor='#89A9CD' name='Experten' iconName={<ContactPhoneIcon/>}/>
+                    <SimpleModal headColor='#89A9CD' randomItem={randomItem}/>
                 </CardButtons>
             </Wrapper>
         </Card>
@@ -97,12 +147,14 @@ export default function MUI_Card({randomItem, loggedUser}) {
 const CardHeader = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   align-items: center;
-  background: #e3c9a8;
+  //background: #e3c9a8;
   justify-content: center;
   flex-wrap: wrap;
   Flex: 1 1 auto;
+
+  color: #1d253b;
 `
 const Category = styled.div`
   display: flex;
@@ -124,10 +176,12 @@ const Titel = styled.div`
 
 const CardButtons = styled.div`
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 5px;
-  gap: 5px;
+  //gap: 10px;
+  background: #cbe0f8;
 `
 
 const ContentSection = styled.section`
@@ -141,6 +195,7 @@ const ContentSection = styled.section`
   height: auto;
   flex-grow: 1;
   font-weight: 500;
+  background: linear-gradient(to bottom, #99b7d8, #99b7d8, #aac4e2, #bad2ed, #cbe0f8); // F1F1F1
 
 `
 
@@ -163,4 +218,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+`
+const WaitingStyle = styled.section`
+  background: white;
 `
