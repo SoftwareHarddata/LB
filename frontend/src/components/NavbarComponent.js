@@ -23,6 +23,15 @@ const useStyles = makeStyles(theme => ({
         fontFamily: "Frutiger Serif", //ont-family: "Frutiger Serif"
     },
 
+    logo:{
+        display: 'flex',
+        justifyContent: 'left',
+        //flexGrow:1, // take all the free place
+        fontFamily: "Frutiger Serif", //ont-family: "Frutiger Serif"
+        alignSelf: 'end',
+        color: 'darkgray',
+    },
+
     appBar: {
         background: '#365A80',
         [theme.breakpoints.up('xl')]: {
@@ -38,12 +47,20 @@ export default function NavbarComponent (props){
     return (
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                    <IconButton
+                    {/*<IconButton
                         color='action'
                         aria-label="logo"
                         className={classes.menuButton}>
                         <AppleIcon />
-                    </IconButton>
+                    </IconButton>*/}
+
+                    {/*<figure>
+                        <img src='myLogo.png' width='20' height='20' alt="Logo"/>
+                    </figure>*/}
+
+                    <p className={classes.logo}>2bbetter</p>
+
+
 
                     <Typography variant='subtitle1' className={classes.title}>
                         Hallo {props.loggedUser?.username}

@@ -18,7 +18,7 @@ import SimpleModal from "./SimpleModal";
 import LikeButtonWithSnackbar from "./Buttons/LikeButtonWithSnackbar";
 import {postAction} from "../services/actionsService";
 import {getLoggedUser} from "../services/userService";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import CircularIndeterminate from "./CircularIndeterminate";
 
 const useStyles = makeStyles({
@@ -67,6 +67,26 @@ export default function MUI_Card({randomItem, loggedUser}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
+    const [categoryVar, setCategoryVar] = React.useState('');
+
+    const checkCategoryForUrl = (Category) => {
+        if(Category==='Gesundheit'){
+            return "gesundheit"
+        }
+        else if(Category==='Personlichkeit'){
+            return "personlichkeit"
+        }
+        else if(Category==='Berufs- und Privatleben'){
+            return "berufundprivat"
+        }
+        else if(Category==='Social'){
+            return "social"
+        }
+        else if(Category==='Sinn'){
+            return "sinn"
+        }
+    }
+
     useEffect(() => {
             console.log("..........")
             console.log(loggedUser)
@@ -87,7 +107,14 @@ export default function MUI_Card({randomItem, loggedUser}) {
             </section>*/
         }
 
-    },  [loggedUser, randomItem, headColor])
+        const checkedCategoryForUrl = checkCategoryForUrl(randomItem?.category)
+        if (checkCategoryForUrl){
+            setCategoryVar(checkedCategoryForUrl)
+        }
+        console.log('categoryVar from MUI_Card'+categoryVar)
+
+
+    },  [loggedUser, randomItem, headColor, categoryVar])
 
    /* const handleClick = () => {
         setOpen(true);
@@ -106,7 +133,6 @@ export default function MUI_Card({randomItem, loggedUser}) {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 
@@ -136,7 +162,7 @@ export default function MUI_Card({randomItem, loggedUser}) {
                     <LikeButtonWithSnackbar headColor='#89A9CD' onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
                     {/*<MyButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
                     <MyButton headColor='#89A9CD' onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon/>}/>
-                    <MyButton headColor='#89A9CD' name='Experten' iconName={<ContactPhoneIcon/>}/>
+                    <Link to={`/user/experten/${categoryVar}`}> <MyButton headColor='#89A9CD' name='Experten' iconName={<ContactPhoneIcon/>}/></Link>
                     <SimpleModal headColor='#89A9CD' randomItem={randomItem}/>
                 </CardButtons>
             </Wrapper>

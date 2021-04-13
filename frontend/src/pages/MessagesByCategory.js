@@ -18,7 +18,7 @@ const myStyles = makeStyles(theme => ({
         padding: theme.spacing(3)
     },
 }))
-export default function ByCategory ({messages, loggedUser, token, setToken}){
+export default function MessagesByCategory ({messages, loggedUser, token, setToken}){
 
     const classes = myStyles()
     const [categoryVar, setCategoryVar] = React.useState('');
@@ -37,7 +37,7 @@ export default function ByCategory ({messages, loggedUser, token, setToken}){
         else if(urlParam==='personlichkeit'){
             return "Personlichkeit"
         }
-        else if(urlParam==='berufundprivate'){
+        else if(urlParam==='berufundprivat'){
             return "Berufs- und Privatleben"
         }
         else if(urlParam==='social'){

@@ -54,9 +54,11 @@ export default function SimpleModal({randomItem, headColor}) {
             <p id="simple-modal-description">
                 {randomItem?.more_infos}
             </p>
-            <p>Pagination allows us to return just a subset of a whole result in a Page. This is useful, for example, when navigating through several pages of data on a web page.
+            {/*<p>Pagination allows us to return just a subset of a whole result in a Page. This is useful, for example,
+                when navigating through several pages of data on a web page.
 
-                Another advantage of pagination is that the amount of data sent from server to client is minimized. By sending smaller pieces of data, we can generally see an improvement in performance.</p>
+                Another advantage of pagination is that the amount of data sent from server to client is minimized.
+                By sending smaller pieces of data, we can generally see an improvement in performance.</p>*/}
             <MyButton headColor={headColor} name='Experten (not working)' iconName={<ContactPhoneIcon/>}/>
         </div>
     );

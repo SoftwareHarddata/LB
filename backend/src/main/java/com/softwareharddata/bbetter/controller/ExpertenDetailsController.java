@@ -32,6 +32,13 @@ public class ExpertenDetailsController {
         return new ResponseEntity<>(createdExpertenDetailsDto, HttpStatus.CREATED);
  }
 
+    // todo: tests; frage: wie auswählen in abhängigkeit von category +subcategory +plz, ...
+    @GetMapping("/experten/{category}")
+    public ResponseEntity <List<ExpertenDetails>> getExpertenByCategory(@PathVariable String category){
+        List<ExpertenDetails> expertenByCategory = expertenService.getExpertenByCategory(category);
+        return new ResponseEntity<>(expertenByCategory, HttpStatus.OK);
+    }
+
    /* @ExceptionHandler(MethodArgumentNotValidException.class)
     public List<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex){
         return ex.getBindingResult().getAllErrors()
@@ -61,11 +68,6 @@ public class ExpertenDetailsController {
         return new ResponseEntity<>(userAllInfos, HttpStatus.OK);
     }*/
 
-    // todo: tests; sollte keine List zurück geben, sondern nur ein user
-    /*@GetMapping("/userinfos/{id}")
-    public ResponseEntity <List<UserAllInfos>> getUserAllInfosById(@PathVariable String id){
-        List<UserAllInfos> userAllInfos = userService.getUserAllInfosById(id);
-        return new ResponseEntity<>(userAllInfos, HttpStatus.OK);
-    }*/
+
 
 }

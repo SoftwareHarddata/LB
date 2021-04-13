@@ -12,9 +12,10 @@ import * as messageApi from './services/messageService'
 import MessageDetails from "./components/MessageDetails";
 import Login from "./pages/Login";
 import * as userApi from "./services/userService";
-import ByCategory from "./pages/ByCategory";
+import MessagesByCategory from "./pages/MessagesByCategory";
 import Actions from "./pages/Actions";
 import ButtonAppBar from "./components/ButtonAppBar";
+import ExpertenByCategory from "./pages/ExpertenByCategory";
 
 
 
@@ -73,9 +74,8 @@ function App() {
                 <ButtonAppBar loggedUser={loggedUser}/>
             </Route>
 
-            {/*todo: experten*/}
             <Route exact path="/user/category/:category">
-                <ByCategory messages={messages} token={token} loggedUser={loggedUser} setToken={setToken}/>
+                <MessagesByCategory messages={messages} token={token} loggedUser={loggedUser} setToken={setToken}/>
                 <ButtonAppBar loggedUser={loggedUser}/>
             </Route>
 
@@ -95,6 +95,13 @@ function App() {
                 <h1>Im Arbeit</h1>
                 <ButtonAppBar loggedUser={loggedUser}/>
             </Route>
+
+            {/*todo: experten*/}
+            <Route exact path="/user/experten/:category">
+                <ExpertenByCategory messages={messages} token={token} loggedUser={loggedUser} setToken={setToken}/>
+                <ButtonAppBar loggedUser={loggedUser}/>
+            </Route>
+
         </Switch>
     </Router>
       </ThemeProvider>

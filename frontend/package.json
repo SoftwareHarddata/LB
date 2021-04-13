@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@material-ui/data-grid": "^4.0.0-alpha.24",
     "axios": "^0.21.1"
   },
   "proxy": "http://localhost:8080"

@@ -100,7 +100,7 @@ export default function Lists ({setToken, loggedUser}){
                     </ListItem>
                     </Link>
 
-                    <Link to="/user/category/berufundprivate">
+                    <Link to="/user/category/berufundprivat">
                     <ListItem button>
                         <ListItemIcon>
                             <LaptopMacIcon fontSize='small'/>
