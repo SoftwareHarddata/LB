@@ -24,10 +24,14 @@ import LocalPhoneOutlinedIcon from '@material-ui/icons/LocalPhoneOutlined';
 import AlternateEmailOutlinedIcon from '@material-ui/icons/AlternateEmailOutlined';
 import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
 import PeopleOutlineOutlinedIcon from '@material-ui/icons/PeopleOutlineOutlined';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import StarsIcon from '@material-ui/icons/Stars';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
+        backgroundColor: '#cbe0f8',
+        color: "#1d253b",
     },
     media: {
         height: 0,
@@ -44,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         transform: 'rotate(180deg)',
     },
     avatar: {
-        backgroundColor: red[500],
+        backgroundColor: '#1d253b',
     },
 }));
 
@@ -77,22 +81,35 @@ export default function DataTable({token, experten, loggedUser, messages, setTok
             />
 
             <CardContent>
+                <div>
+                    <IconButton aria-label="verifiziert" disabled={!experten.verified}>
+                        <VerifiedUserIcon fontSize='small'/> <Typography variant="caption" color="textSecondary" component="p">
+                        verifiziert </Typography>
+                    </IconButton>
+
+                    <IconButton aria-label="Premium" disabled={!experten.premium}>
+                        <StarsIcon fontSize='small'/> <Typography variant="caption" color="textSecondary" component="p">
+                        Premium </Typography>
+                    </IconButton>
+
+                </div>
+
                 <Typography variant="body2" color="textSecondary" component="p">
                     {experten.titel} {experten.firstname} {experten.lastname}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
 
-                <IconButton aria-label="phone">
+                <IconButton aria-label="phone" disabled={!experten.hasTel}>
                     <LocalPhoneOutlinedIcon />
                 </IconButton>
-                <IconButton aria-label="email">
+                <IconButton aria-label="email" disabled={!experten.hasEmail}>
                     <AlternateEmailOutlinedIcon />
                 </IconButton>
-                <IconButton aria-label="Videocam">
+                <IconButton aria-label="Videocam" disabled={!experten.hasVideo}>
                     <VideocamOutlinedIcon />
                 </IconButton>
-                <IconButton aria-label="faceToFace" disabled="false">
+                <IconButton aria-label="faceToFace" disabled={true}>
                     <PeopleOutlineOutlinedIcon />
                 </IconButton>
 
@@ -110,28 +127,18 @@ export default function DataTable({token, experten, loggedUser, messages, setTok
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Method:</Typography>
+                    <Typography paragraph>Kontaktdaten:</Typography>
                     <Typography paragraph>
-                        Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                        minutes.
+                        Adresse: {experten.adresse}, {experten.plz} <br/>
+                        Tel.: {experten.tel} <br/>
+                        Email: {experten.email} <br/>
                     </Typography>
+                    <br/>
                     <Typography paragraph>
-                        Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-                        heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-                        browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-                        and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-                        pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-                        saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-                    </Typography>
-                    <Typography paragraph>
-                        Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-                        without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-                        medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-                        again without stirring, until mussels have opened and rice is just tender, 5 to 7
-                        minutes more. (Discard any mussels that don’t open.) ...
+                        {experten.infotext}
                     </Typography>
                     <Typography>
-                        Set aside off of the heat to let rest for 10 minutes, and then serve.
+                        Rufen Sie gerne an!
                     </Typography>
                 </CardContent>
             </Collapse>

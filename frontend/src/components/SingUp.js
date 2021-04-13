@@ -67,7 +67,7 @@ export default function SingUp() {
 
     return (
         <>
-            <p>Please Login</p>
+            <Logo>2bbetter</Logo>
 
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <input
@@ -150,12 +150,15 @@ export default function SingUp() {
                 }
 
                 <button type="submit">Sing up</button>
-            </Form>
 
-            <div>
+
+            <LoginContent>
                 Or login if you are already a user
-                <NavLink to="/user/login" activeClassName="active"> <button type="button">Login</button></NavLink>
-            </div>
+                <br/>
+                <button> <NavLink to="/user/login" >Login</NavLink>  </button>
+            </LoginContent>
+
+            </Form>
         </>
     )
 }
@@ -163,6 +166,7 @@ export default function SingUp() {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-self: center;
   input {
     flex-grow: 1;
     text-align: center;
@@ -171,8 +175,10 @@ const Form = styled.form`
   button {
     padding: 8px;
     margin: 8px;
-    background-color:blueviolet ;
+    color: white;
+    background-color: #1D253B ;
     font-family: 'Al Nile';
+    border-radius: 20px;
   }
 `
 
@@ -185,4 +191,17 @@ const ErrorMessage = styled.span`
   border-radius: 3px;
   font-size: medium;
 `
+
+const Logo = styled.section`
+  display: flex;
+  justify-content: center;
+  font-family: Frutiger Serif;
+  align-self: center;
+  color: darkgrey;
+  margin: 20px;
+`
+
+const LoginContent = styled.section`
+  display: flex;
+  flex-direction: column;`
 ;

@@ -6,14 +6,9 @@ import LoginComponent from "../components/LoginComponent";
 function Login({setToken, token}) {
   return (
     <PageLayout>
-      <Header>
-      </Header>
-        <section>
+        <Section>
             <LoginComponent token={token} setToken={setToken}/>
-        </section>
-        <Footer>
-            <p>footer</p>
-        </Footer>
+        </Section>
     </PageLayout>
   );
 }
@@ -24,19 +19,12 @@ const PageLayout = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background: #333;
+  background: #365a80;
   color: white;
-  margin: 55px;
+  //margin: 55px;
 `
 
-const Header = styled.header`
-  padding: 0 16px;
-  background: #222;
-  color: wheat;
-`
-
-const Footer = styled.footer`
-  padding: 0 16px;
-  background: hotpink;
-  color: #61dafb;
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
 `

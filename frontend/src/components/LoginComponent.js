@@ -5,6 +5,7 @@ import {useForm} from "react-hook-form";
 import {Link, NavLink, Redirect} from 'react-router-dom';
 import {getLoggedUser, loggedUser} from "../services/userService";
 import CircularIndeterminate from "./CircularIndeterminate";
+import {Toolbar} from "@material-ui/core";
 
 
 export default function LoginComponent({setToken, token}) {
@@ -55,7 +56,7 @@ export default function LoginComponent({setToken, token}) {
 
     return (
         <>
-            <p>Please Login</p>
+            <Logo>2bbetter</Logo>
 
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <input
@@ -109,19 +110,20 @@ export default function LoginComponent({setToken, token}) {
                 }
 
 
-                <button type="submit">login</button>
+                <button type="submit">Login</button>
 
                 {
                     conflictError &&
                     <>
                         <ErrorMessage >{conflictError}</ErrorMessage>
                         <br/>
-                        <p> please try again or <Link to="/user/singup">SingUp</Link></p>
+                        <ErrorMessage> please try again or <Link to="/user/singup">SingUp</Link></ErrorMessage>
                     </>
 
                 }
 
-                <NavLink to="/user/singup" className="btn btn-dark" activeClassName="active">SingUp</NavLink>
+                <button> <NavLink to="/user/singup" >SingUp</NavLink>  </button>
+
             </Form>
         </>
     )
@@ -130,6 +132,7 @@ export default function LoginComponent({setToken, token}) {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-self: center;
   input {
     flex-grow: 1;
     text-align: center;
@@ -138,10 +141,13 @@ const Form = styled.form`
   button {
     padding: 8px;
     margin: 8px;
-    background-color:blueviolet ;
+    color: white;
+    background-color: #1D253B ;
     font-family: 'Al Nile';
+    border-radius: 20px;
   }
 `
+
 
 const ErrorMessage = styled.span`
   padding: 0.5em;
@@ -157,5 +163,14 @@ const WaitingStyle = styled.section`
   width: 100%;
   height: 100%;
   background: white;
+`
+
+const Logo = styled.section`
+  display: flex;
+  justify-content: center;
+  font-family: Frutiger Serif;
+  align-self: center;
+  color: darkgrey;
+  margin: 20px;
 `
 ;

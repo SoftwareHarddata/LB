@@ -63,7 +63,7 @@ export default function ExpertenByCategory ({messages, loggedUser, token, setTok
             {/*<div className={classes.toolbar}></div>*/}
             <Titel>Testing</Titel>
 
-            <Test>
+            <Wrapper>
                 <div className={classes.toolbar}></div>
                 <Content >
                     {experten?.map((expertItem) => (
@@ -74,7 +74,7 @@ export default function ExpertenByCategory ({messages, loggedUser, token, setTok
                         </li>
                     ))}
                 </Content>
-            </Test>
+            </Wrapper>
 
 
 
@@ -121,8 +121,9 @@ const Content = styled.ul`
 }*/
 `
 
-const Test = styled.div`
+const Wrapper = styled.div`
   //padding: 0 16px;
   display: flex;
   padding-top: 40px;
+  justify-content: center;
 `
