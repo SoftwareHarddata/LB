@@ -20,6 +20,7 @@ import {Link, NavLink} from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
 import FilterIcon from '@material-ui/icons/Filter';
 import {getActionsFromUser} from "../services/actionsService";
+import styled from "styled-components/macro";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,13 +38,13 @@ export default function Lists ({setToken, loggedUser}){
     }, [loggedUser])
 
     return (
-        <>
+        <Wrapper>
             <List component='nav'
-                  subheader={
+                  /*subheader={
                       <ListSubheader component="div" id="nested-list-subheader">
                           Menu
                       </ListSubheader>
-                  }
+                  }*/
             >
                 {/*// todo: to do*/}
                 {/*<ListItem button>
@@ -141,6 +142,8 @@ export default function Lists ({setToken, loggedUser}){
                             primary='Datenschutz' />
                     </ListItem>*/}
 
+                </div>
+
                     <NavLink to="/user/login" activeClassName="active">
                     <ListItem button onClick={()=> setToken(undefined)}>
                         <ListItemIcon>
@@ -150,7 +153,7 @@ export default function Lists ({setToken, loggedUser}){
                             primary='Logout' />
                     </ListItem>
                         </NavLink>
-                </div>
+
 
 
 
@@ -158,6 +161,14 @@ export default function Lists ({setToken, loggedUser}){
 
 
             </List>
-        </>
+        </Wrapper>
     )
 }
+
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  // background: #A8AAB5;
+  background: linear-gradient(to bottom, #99b7d8, #99b7d8, #aac4e2, #bad2ed, #cbe0f8);
+`

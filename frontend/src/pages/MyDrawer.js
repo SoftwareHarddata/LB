@@ -8,9 +8,11 @@ const myStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
-    },
+},
     drawerPaper: {
         width: drawerWidth,
+        background: '#89a9cd',
+
     },
     toolbar : theme.mixins.toolbar,
 
