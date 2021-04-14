@@ -134,7 +134,7 @@
                 </configuration>
             </plugin>
             <!-- for mysql test via docker -->
-            <plugin>
+          <!--  <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.34.0</version>
@@ -204,7 +204,7 @@
                         <exclude>**/*IT.*</exclude>
                     </excludes>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <!-- end:for mysql test via docker -->
         </plugins>
     </build>
