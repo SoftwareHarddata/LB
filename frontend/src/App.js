@@ -57,6 +57,10 @@ function App() {
                 <Login setToken={setToken} token={token} />
             </Route>
 
+            <Route exact path="/">
+                <Login setToken={setToken} token={token} />
+            </Route>
+
             <Route exact path="/:username">
                 <Welcome setLoggedUser={setLoggedUser} setToken={setToken} loggedUser={loggedUser} token={token}/>
                 <ButtonAppBar loggedUser={loggedUser}/>

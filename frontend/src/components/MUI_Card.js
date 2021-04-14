@@ -59,7 +59,7 @@ export default function MUI_Card({randomItem, loggedUser}) {
             //'linear-gradient(to right, #00c6ff, #0072ff)'
                 //'#0a18ab'
         }
-        else if(randomItem==='Sinn'){
+        else if(randomItem.category==='Sinn'){
             return "#89A9CD"
         }
     }
@@ -138,11 +138,9 @@ export default function MUI_Card({randomItem, loggedUser}) {
 
     return (
         <Card className={classes.root}>
-
                 <CardActionArea>
                     <CardHeader
                         style={{
-
                             background: headColor,
                         }}
                     >
@@ -179,7 +177,6 @@ const CardHeader = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   Flex: 1 1 auto;
-
   color: #1d253b;
 `
 const Category = styled.div`
