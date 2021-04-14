@@ -34,7 +34,14 @@ export default function LoginComponent({setToken, token}) {
         if (!data.userName && !data.userPassword) {
             return
         }
-        loginUser(data.userName, data.userPassword).then(setToken).catch((error) => setConflictError("username oder password stimmen nicht überein"))
+        loginUser(data.userName, data.userPassword).then(
+            setToken
+
+            ).catch((error) => {
+                setSingUpData([]);
+                setConflictError("username oder password stimmen nicht überein")
+            }
+        )
 
         // clean fields
         e.target.reset();
@@ -119,7 +126,6 @@ export default function LoginComponent({setToken, token}) {
                         <br/>
                         <ErrorMessage> please try again or <Link to="/user/singup">SingUp</Link></ErrorMessage>
                     </>
-
                 }
 
                 <button> <NavLink to="/user/singup" >SingUp</NavLink>  </button>

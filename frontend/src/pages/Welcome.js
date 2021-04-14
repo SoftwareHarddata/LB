@@ -57,6 +57,9 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
     const classes = myStyles()
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
+    const [BackgroundColor, setBackgroundColor] = React.useState(false);
+
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
     }
@@ -106,6 +109,10 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
             </ButtonsNavigation>
         </div>
 
+            <Test className='app'>
+
+            </Test>
+
         </>
     )
 }
@@ -128,7 +135,24 @@ const AButton = styled.button`
 
   color: white;
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)';
-  
   padding: 5px;
 
 `;
+
+const Test = styled.button`
+  .Black{
+    background-color: black;
+    color: white;
+  }
+
+  .White{
+    background-color: white;
+    color: black;
+  }
+
+  .nothing{
+    display: none;
+  }
+
+`;
+
