@@ -149,7 +149,7 @@ export default function SingUp() {
                     conflictError && <ErrorMessage >{conflictError}</ErrorMessage>
                 }
 
-                <button type="submit">Sing up</button>
+                <button type="submit">SignUp</button>
 
 
             <LoginContent>
@@ -185,7 +185,7 @@ const Form = styled.form`
 const ErrorMessage = styled.span`
   padding: 0.5em;
   margin: 0.5em;
-  color: crimson;
+  color: #470f1a;
   //background: darkgrey;
   border: none;
   border-radius: 3px;

@@ -61,7 +61,7 @@ export default function ExpertenByCategory ({messages, loggedUser, token, setTok
             <Header loggedUser={loggedUser} setToken={setToken} />
 
             {/*<div className={classes.toolbar}></div>*/}
-            <Titel>Testing</Titel>
+            <Titel>Experten</Titel>
 
             <Wrapper>
                 <div className={classes.toolbar}></div>
@@ -96,8 +96,10 @@ const AppContainer = styled.div`
 
 const Titel = styled.p`
   //padding: 0 16px;
-  //display: flex;
+  display: flex;
   margin-top: 20px;
+  flex-direction: row;
+  justify-content: center;
 `
 
 const Content = styled.ul`

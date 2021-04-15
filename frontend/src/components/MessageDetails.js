@@ -40,6 +40,7 @@ export default function MessageDetails ({messages, loggedUser, token, setToken})
                 <MyDrawer
                     variant='permanent'
                     open ={true}
+                    setToken={setToken}
                 />
             </Hidden>
             <Hidden xlUp>
@@ -47,6 +48,7 @@ export default function MessageDetails ({messages, loggedUser, token, setToken})
                     variant='temporary'
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
+                    setToken={setToken}
                 />
             </Hidden>
             <MySlider className="myCard">

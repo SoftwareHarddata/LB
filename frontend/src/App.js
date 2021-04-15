@@ -56,7 +56,6 @@ function App() {
             <Route exact path="/user/login">
                 <Login setToken={setToken} token={token} />
             </Route>
-
             <Route exact path="/">
                 <Login setToken={setToken} token={token} />
             </Route>
@@ -92,12 +91,12 @@ function App() {
             {/*todo: suchfunktion, userdetails*/}
             <Route exact path="/user/profil">
                 <h1>Im Arbeit</h1>
-                <ButtonAppBar loggedUser={loggedUser}/>
+                <ButtonAppBar loggedUser={loggedUser} setToken={setToken}/>
             </Route>
 
             <Route exact path="/user/suchen">
                 <h1>Im Arbeit</h1>
-                <ButtonAppBar loggedUser={loggedUser}/>
+                <ButtonAppBar loggedUser={loggedUser} setToken={setToken}/>
             </Route>
 
             {/*todo: experten*/}

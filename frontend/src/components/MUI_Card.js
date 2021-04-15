@@ -159,7 +159,7 @@ export default function MUI_Card({randomItem, loggedUser}) {
                 <CardButtons>
                     <LikeButtonWithSnackbar headColor='#89A9CD' onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
                     {/*<MyButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
-                    <MyButton headColor='#89A9CD' onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon/>}/>
+                    <MyButton headColor='#89A9CD' onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon color="primary"/>}/>
                     <Link to={`/user/experten/${categoryVar}`}> <MyButton headColor='#89A9CD' name='Experten' iconName={<ContactPhoneIcon/>}/></Link>
                     <SimpleModal headColor='#89A9CD' randomItem={randomItem}/>
                 </CardButtons>

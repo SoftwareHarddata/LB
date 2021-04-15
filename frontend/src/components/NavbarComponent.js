@@ -28,8 +28,8 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'left',
         //flexGrow:1, // take all the free place
         fontFamily: "Frutiger Serif", //ont-family: "Frutiger Serif"
-        alignSelf: 'end',
         color: 'darkgray',
+        margin: 5
     },
 
     appBar: {
@@ -58,7 +58,7 @@ export default function NavbarComponent (props){
                         <img src='myLogo.png' width='20' height='20' alt="Logo"/>
                     </figure>*/}
 
-                    <p className={classes.logo}>2bbetter</p>
+                    <div className={classes.logo}>2bbetter</div>
 
 
 

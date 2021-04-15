@@ -20,7 +20,8 @@ const myStyles = makeStyles(theme => ({
         display: 'flex',
         //flexWrap: 'wrap',
         flexGrow: 1,
-        paddingTop: theme.spacing(11),
+        flexDirection: "column",
+        paddingTop: theme.spacing(3),
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3),
 
@@ -72,20 +73,40 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
             <div className={classes.content}>
             <div className={classes.toolbar}></div>
 
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                    facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                    gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                    donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis...
+                <Typography h1>
+                    Herzlich Willkommen bei 2bbetter (to be better)!
                 </Typography>
+                <Typography paragraph>
+                    <br/>
+                    - Im Home-Botton werden Ihnen personalisierte Nachrichten angezeigt.
+                    <br/>
+                    <br/>
+                    - Lieblingsnachrichten können Sie zu 'Favoriten' hinzufügen und wieder aufrufen.
+                    <br/>
+                    <br/>
+                    - Außerdem können Sie den Nachrichten ein Like geben, um auch in Zukunft ähnliche Nachrichten zu erhalten.
+                    <br/> <br/>
+                    - Sie können zudem Hintergrund-Infos einsehen und mit Partnerexperten in Kontakt treten.
+                    <br/> <br/>
+                    - Über das Hamburger Menü können Sie entspannt durch alle Nachrichten stöbern.
+
+                </Typography>
+                <Typography paragraph>
+                    Viel Spaß mit der App wünscht
+                    Yan J. Cobarrubias Pérez
+                </Typography>
+
+                <ButtonsNavigation>
+                    <AButton> <NavLink to="/user/details" activeClassName="active"> profil </NavLink> </AButton>
+                </ButtonsNavigation>
             </div>
+
 
             <Hidden lgDown>
                 <MyDrawer
                     variant='permanent'
                     open ={true}
+                    setToken={setToken}
                 />
             </Hidden>
 
@@ -94,24 +115,10 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
                     variant='temporary'
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
+                    setToken={setToken}
                 />
             </Hidden>
-
-            <ButtonsNavigation>
-                <AButton> <NavLink to="/user/details" activeClassName="active"> profil </NavLink> </AButton>
-
-                {/*
-            <form method="post" action="/logout">
-                <a href="#" onClick={this.parentNode.submit()}>Logout</a>
-            </form>
-            //or a button from type submit
-            */}
-            </ButtonsNavigation>
         </div>
-
-            <Test className='app'>
-
-            </Test>
 
         </>
     )

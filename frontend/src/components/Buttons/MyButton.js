@@ -39,15 +39,17 @@ export default function MyButton({name, iconName, onClick, headColor}) {
     return(
         // todo: responsive text bei width auto
         <ThemeProvider theme={theme}>
-            <Button className={classes.buttonSend}
-
+            <Button
+                className={classes.buttonSend}
                     style={{
                         background: headColor,
                     }}
-
                     type="button"
                     onClick={onClick}
-                    startIcon={iconName}>
+                    startIcon={iconName}
+
+
+            >
                 <Hidden xlDown>{name}</Hidden>
             </Button>
 

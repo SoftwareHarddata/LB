@@ -125,10 +125,12 @@ export default function LoginComponent({setToken, token}) {
                         <ErrorMessage >{conflictError}</ErrorMessage>
                         <br/>
                         <ErrorMessage> please try again or <Link to="/user/singup">SingUp</Link></ErrorMessage>
+                        <br/>
+                        <ErrorMessage> or try: <br/> username=user <br/> password=user </ErrorMessage>
                     </>
                 }
 
-                <button> <NavLink to="/user/singup" >SingUp</NavLink>  </button>
+                <button> <NavLink to="/user/singup" >SignUp</NavLink>  </button>
 
             </Form>
         </>
@@ -158,7 +160,7 @@ const Form = styled.form`
 const ErrorMessage = styled.span`
   padding: 0.5em;
   margin: 0.5em;
-  color: crimson;
+  color: #470f1a;
   //background: darkgrey;
   border: none;
   border-radius: 3px;
