@@ -51,9 +51,18 @@ public class WatchlistController {
         return new ResponseEntity<>(actionsList, HttpStatus.OK);
     }
 
+
+    /*// todo: ("/{idUserSingup}/{action}")
+    @DeleteMapping("/{idMessage}")
+    public ResponseEntity<Void> deleteRepository(@PathVariable int idMessage){
+        actionsService.deleteFromWatchlist(idMessage);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }*/
+
     /*
-    @DeleteMapping("{id}")
-    public void deleteRepository(@PathVariable String id){
-        watchListService.deleteFromWatchlist(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String id){
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }*/
 }

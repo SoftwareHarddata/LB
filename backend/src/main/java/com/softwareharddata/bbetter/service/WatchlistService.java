@@ -51,13 +51,9 @@ public class WatchlistService {
 
         }
 
-
-
-    /*public void deleteFromWatchlist(String id) {
-        watchlistDb.deleteById(id);
-    }
-Actions_Message
-
+    /*public Void deleteFromWatchlist(int idAction) {
+        return watchlistDb.deleteByIdAction(idAction).
+                orElseThrow(() -> new EntityNotFoundException(String.format("Action or idUserSingup not found with: %s", idAction)));
     }*/
 
 }

@@ -11,7 +11,12 @@ import java.util.Optional;
 @Repository
 public interface WatchListMessageMysqlDb extends CrudRepository<Actions,String> {
 
+    String action = "watchlist";
+
     Optional<List<Actions>> findAllByAction (String action);
 
     Optional<List<Actions>> findAllByIdUserSingupAndAction (String idUserSingup, String action);
+
+    Optional<Void> deleteByIdAction (int idAction);
+
 }

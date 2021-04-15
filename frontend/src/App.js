@@ -90,12 +90,19 @@ function App() {
 
             {/*todo: suchfunktion, userdetails*/}
             <Route exact path="/user/profil">
-                <h1>Im Arbeit</h1>
+                <div>
+                    <h1>Thank you. That's is a test.</h1>
+                    <p> We are measuring the clicks for potencial feature to know which one we are going to develop in the next sprint.</p>
+                </div>
                 <ButtonAppBar loggedUser={loggedUser} setToken={setToken}/>
             </Route>
 
             <Route exact path="/user/suchen">
-                <h1>Im Arbeit</h1>
+                <div>
+                    <h1>Thank you. That's is a test.</h1>
+                    <p> We are measuring the clicks for potencial feature to know which one we are going to develop in the next sprint.</p>
+                </div>
+
                 <ButtonAppBar loggedUser={loggedUser} setToken={setToken}/>
             </Route>
 

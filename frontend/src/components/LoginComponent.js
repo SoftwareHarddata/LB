@@ -124,13 +124,13 @@ export default function LoginComponent({setToken, token}) {
                     <>
                         <ErrorMessage >{conflictError}</ErrorMessage>
                         <br/>
-                        <ErrorMessage> please try again or <Link to="/user/singup">SingUp</Link></ErrorMessage>
-                        <br/>
-                        <ErrorMessage> or try: <br/> username=user <br/> password=user </ErrorMessage>
+                        <ErrorMessage> please try again or <Link to="/user/singup">SignUp</Link></ErrorMessage>
                     </>
                 }
 
                 <button> <NavLink to="/user/singup" >SignUp</NavLink>  </button>
+                <br/>
+                <ErrorMessage> or try: <br/> username=user <br/> password=user </ErrorMessage>
 
             </Form>
         </>

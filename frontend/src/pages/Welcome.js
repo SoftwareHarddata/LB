@@ -27,7 +27,9 @@ const myStyles = makeStyles(theme => ({
 
         //background: 'linear-gradient(to bottom, #99b7d8, #99b7d8, #aac4e2, #bad2ed, #cbe0f8)', // F1F1F1
         backgroundColor: '#A8AAB5',
-        color: "#1D253B"
+        color: "#1D253B",
+        fontFamily: "Frutiger Serif"
+
     },
 
 }))
@@ -73,11 +75,10 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
             <div className={classes.content}>
             <div className={classes.toolbar}></div>
 
-                <Typography h1>
+                <h4>
                     Herzlich Willkommen bei 2bbetter (to be better)!
-                </Typography>
-                <Typography paragraph>
-                    <br/>
+                </h4>
+                <h6>
                     - Im Home-Botton werden Ihnen personalisierte Nachrichten angezeigt.
                     <br/>
                     <br/>
@@ -89,12 +90,11 @@ export default function Welcome ({token, setLoggedUser, loggedUser, setToken}){
                     - Sie können zudem Hintergrund-Infos einsehen und mit Partnerexperten in Kontakt treten.
                     <br/> <br/>
                     - Über das Hamburger Menü können Sie entspannt durch alle Nachrichten stöbern.
-
-                </Typography>
-                <Typography paragraph>
+                    <br/> <br/>
                     Viel Spaß mit der App wünscht
+                    <br/>
                     Yan J. Cobarrubias Pérez
-                </Typography>
+                </h6>
 
                 <ButtonsNavigation>
                     <AButton> <NavLink to="/user/details" activeClassName="active"> profil </NavLink> </AButton>

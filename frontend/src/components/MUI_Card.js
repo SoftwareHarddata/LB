@@ -66,6 +66,9 @@ export default function MUI_Card({randomItem, loggedUser}) {
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [clickedSave, setClickedSave] = React.useState(true); //
+    const [colorSave, setColorSave] = React.useState('default');
+
 
     const [categoryVar, setCategoryVar] = React.useState('');
 
@@ -113,7 +116,6 @@ export default function MUI_Card({randomItem, loggedUser}) {
         }
         console.log('categoryVar from MUI_Card'+categoryVar)
 
-
     },  [loggedUser, randomItem, headColor, categoryVar])
 
    /* const handleClick = () => {
@@ -121,7 +123,21 @@ export default function MUI_Card({randomItem, loggedUser}) {
     };*/
 
     const handleClickWatchlist = () => {
-        postAction(loggedUser?.idUserSingUp, randomItem?.id_message, "watchlist")
+
+        if(clickedSave)
+        {
+            console.log("added to favorite")
+            setColorSave('primary')
+            postAction(loggedUser?.idUserSingUp, randomItem?.id_message, "watchlist")
+        }
+        else {
+            {
+                console.log("delete from favorite")
+                setColorSave('default')
+            }
+        }
+
+        setClickedSave(!clickedSave)
     };
 
     const handleClickMore = () => {
@@ -159,7 +175,7 @@ export default function MUI_Card({randomItem, loggedUser}) {
                 <CardButtons>
                     <LikeButtonWithSnackbar headColor='#89A9CD' onClick={handleClickMore} onClose={handleClose} isOpen={open}/>
                     {/*<MyButton name='mehr davon' iconName={<ThumbUpIcon/>}/>*/}
-                    <MyButton headColor='#89A9CD' onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon color="primary"/>}/>
+                    <MyButton headColor='#89A9CD' onClick={handleClickWatchlist} name='save' iconName={<FavoriteIcon color={colorSave}/>}/>
                     <Link to={`/user/experten/${categoryVar}`}> <MyButton headColor='#89A9CD' name='Experten' iconName={<ContactPhoneIcon/>}/></Link>
                     <SimpleModal headColor='#89A9CD' randomItem={randomItem}/>
                 </CardButtons>

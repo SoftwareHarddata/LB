@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
                 //.antMatchers(HttpMethod.POST,"/").permitAll()
                 //.antMatchers(HttpMethod.GET,"/").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/customer").permitAll()
                 .antMatchers("/api/customer/me").permitAll() // todo: weg
