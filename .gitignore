@@ -1,1 +1,5 @@
-/.idea/
+ask
+.idea
+*.iws
+*.iml
+*.ipr
